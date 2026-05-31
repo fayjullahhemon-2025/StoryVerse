@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="discover.html" class="nav-link">Discover</a>
+                <a href="trending.html" class="nav-link">Trending</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <img src="assets/default-avatar.png" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="library.html"><i class="fas fa-book"></i> My Library</a>
+                        <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="book-header">
+        <div class="container">
+            <div class="book-header-content">
+                <div class="book-header-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white;">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="book-header-info">
+                    <h1>The Last Kingdom</h1>
+                    <a href="#" class="book-author-link">by Sarah Johnson</a>
+                    <div class="book-stats">
+                        <div class="book-stat">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (1.2K reviews)</span>
+                        </div>
+                        <div class="book-stat">
+                            <i class="fas fa-eye"></i>
+                            <span>125K views</span>
+                        </div>
+                        <div class="book-stat">
+                            <i class="fas fa-book-open"></i>
+                            <span>45 chapters</span>
+                        </div>
+                    </div>
+                    <div class="book-tags">
+                        <span class="tag">Fantasy</span>
+                        <span class="tag">Adventure</span>
+                        <span class="tag">Ongoing</span>
+                        <span class="tag">Teen+</span>
+                    </div>
+                    <div class="book-actions">
+                        <button class="btn-primary btn-large" onclick="startReading()">
+                            <i class="fas fa-book-reader"></i> Start Reading
+                        </button>
+                        <button class="btn-secondary btn-large" onclick="addToLibrary()">
+                            <i class="fas fa-bookmark"></i> Add to Library
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-synopsis">
+        <div class="container">
+            <h2>Synopsis</h2>
+            <p>In a world where magic has faded and kingdoms crumble, one young warrior must rise to reclaim her birthright. Princess Aria thought she was just another orphan until the day she discovered the ancient sword that only the true heir to the throne could wield.</p>
+            <p>Now hunted by dark forces and betrayed by those she trusted, Aria must gather allies from the most unlikely places. With the help of a mysterious mage, a reformed thief, and a dragon thought to be extinct, she embarks on a quest to restore the Last Kingdom before it's lost forever.</p>
+            <p>But the greatest enemy might not be the dark lord threatening her kingdom—it might be the secrets of her own past.</p>
+        </div>
+    </section>
+
+    <section class="chapters-section">
+        <div class="container">
+            <h2>Chapters</h2>
+            <div class="chapters-list" id="chaptersList">
+                <!-- Chapters will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section class="comments-section">
+        <div class="container">
+            <h2>Reviews & Comments</h2>
+            <div class="comment-form">
+                <textarea rows="3" placeholder="Share your thoughts about this book..."></textarea>
+                <button class="btn-primary" style="margin-top: 1rem;">Post Comment</button>
+            </div>
+            <div class="comments-list">
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">Alex Chen</span>
+                        <span class="comment-time">2 days ago</span>
+                    </div>
+                    <div class="comment-text">
+                        This is absolutely amazing! The character development is incredible and I can't wait for the next chapter. Highly recommend!
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">Maya Patel</span>
+                        <span class="comment-time">5 days ago</span>
+                    </div>
+                    <div class="comment-text">
+                        One of the best fantasy stories I've read on this platform. The world-building is top-notch!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>StoryVerse</h4>
+                    <p>Empowering writers to share their stories and earn from their passion.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>For Writers</h4>
+                    <ul>
+                        <li><a href="creator-studio.html">Creator Studio</a></li>
+                        <li><a href="monetization.html">Monetization Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Readers</h4>
+                    <ul>
+                        <li><a href="discover.html">Discover Stories</a></li>
+                        <li><a href="wallet.html">Buy Coins</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 StoryVerse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/book.js"></script>
+</body>
+</html>

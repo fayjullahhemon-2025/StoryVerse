@@ -1,0 +1,280 @@
+/* Book Detail Page */
+.book-header {
+    background-color: var(--dark-surface);
+    padding: 3rem 0;
+}
+
+.book-header-content {
+    display: flex;
+    gap: 3rem;
+}
+
+.book-header-cover {
+    width: 300px;
+    height: 420px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.book-header-info {
+    flex: 1;
+}
+
+.book-header-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.book-author-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.book-stats {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.book-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.book-stat i {
+    color: var(--primary-color);
+}
+
+.book-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.tag {
+    padding: 0.5rem 1rem;
+    background-color: var(--dark-bg);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.book-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.book-synopsis {
+    padding: 3rem 0;
+}
+
+.book-synopsis h2 {
+    margin-bottom: 1rem;
+}
+
+.book-synopsis p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* Chapters List */
+.chapters-section {
+    padding: 3rem 0;
+}
+
+.chapters-section h2 {
+    margin-bottom: 2rem;
+}
+
+.chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chapter-item {
+    background-color: var(--dark-surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.chapter-item:hover {
+    background-color: var(--dark-bg);
+    transform: translateX(5px);
+}
+
+.chapter-info {
+    flex: 1;
+}
+
+.chapter-number {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.chapter-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chapter-lock {
+    color: var(--warning-color);
+    font-size: 1.2rem;
+}
+
+.chapter-price {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Reader Page */
+.reader-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.reader-header {
+    background-color: var(--dark-surface);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.reader-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.reader-header .chapter-number {
+    color: var(--primary-color);
+}
+
+.reader-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.reader-content {
+    background-color: var(--dark-surface);
+    padding: 3rem;
+    border-radius: 12px;
+    line-height: 2;
+    font-size: 1.1rem;
+}
+
+.reader-content p {
+    margin-bottom: 1.5rem;
+}
+
+.reader-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Comments Section */
+.comments-section {
+    padding: 3rem 0;
+}
+
+.comments-section h2 {
+    margin-bottom: 2rem;
+}
+
+.comment-form {
+    background-color: var(--dark-surface);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--dark-border);
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    font-family: inherit;
+    resize: vertical;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment {
+    background-color: var(--dark-surface);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.comment-time {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .book-header-content {
+        flex-direction: column;
+    }
+    
+    .book-header-cover {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .book-actions {
+        flex-direction: column;
+    }
+    
+    .reader-content {
+        padding: 1.5rem;
+    }
+}

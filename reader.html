@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse</span>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="window.location.href='book.html'">
+                    <i class="fas fa-arrow-left"></i> Back to Book
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="reader-container">
+        <div class="reader-header">
+            <div class="chapter-number">Chapter 1</div>
+            <h1>The Awakening</h1>
+            <div class="reader-controls">
+                <div>
+                    <button class="btn-secondary" onclick="changeFont('smaller')">
+                        <i class="fas fa-minus"></i> Font
+                    </button>
+                    <button class="btn-secondary" onclick="changeFont('larger')">
+                        <i class="fas fa-plus"></i> Font
+                    </button>
+                </div>
+                <button class="btn-secondary" onclick="toggleTheme()">
+                    <i class="fas fa-adjust"></i> Theme
+                </button>
+            </div>
+        </div>
+
+        <div class="reader-content" id="readerContent">
+            <p>The morning sun cast long shadows across the training yard as Aria swung her wooden sword with practiced precision. Sweat dripped down her forehead, but she didn't stop. She couldn't stop. Not when the memories of last night's dream still haunted her.</p>
+
+            <p>"Again!" Master Theron's voice boomed across the yard. The old warrior watched her with keen eyes, noting every movement, every hesitation.</p>
+
+            <p>Aria reset her stance and began the sequence again. Strike, parry, dodge, counter. The movements were second nature now, burned into her muscle memory through years of training. But something felt different today. The wooden sword felt lighter in her hands, almost as if it were guiding her movements rather than the other way around.</p>
+
+            <p>"That's enough for today," Theron said, approaching her with a curious expression. "You're distracted. What's troubling you?"</p>
+
+            <p>Aria lowered her sword, catching her breath. Should she tell him about the dream? About the voice that called to her in the darkness, promising power and destiny? About the strange symbol that had appeared on her palm when she woke?</p>
+
+            <p>"It's nothing, Master," she lied, hiding her marked hand behind her back.</p>
+
+            <p>Theron's eyes narrowed, but he didn't press. "Very well. But remember, Aria—secrets have a way of revealing themselves at the worst possible moment. Whatever you're hiding, it won't stay hidden forever."</p>
+
+            <p>As he walked away, Aria looked down at her palm. The symbol glowed faintly in the morning light—a sword crossed with a crown, surrounded by ancient runes she couldn't read but somehow understood. They spoke of a legacy long forgotten, of a kingdom that fell to darkness, and of a heir who would rise to reclaim it all.</p>
+
+            <p>She clenched her fist, hiding the mark once more. She was just an orphan, a nobody training to be a palace guard. She couldn't be the heir to anything.</p>
+
+            <p>Could she?</p>
+
+            <p>The sound of horns echoed from the castle walls, signaling the arrival of important visitors. Aria joined the other trainees rushing to the main courtyard, where a procession of dark-robed figures was entering through the gates.</p>
+
+            <p>"Who are they?" whispered Kael, one of her fellow trainees.</p>
+
+            <p>"The Dark Council," someone answered. "They haven't been seen in the capital for twenty years."</p>
+
+            <p>As the procession passed, the lead figure turned his hooded head toward Aria. Though she couldn't see his face, she felt his gaze pierce through her, cold and calculating. Her palm burned where the mark lay hidden.</p>
+
+            <p>He knows, she thought with sudden certainty. Somehow, he knows.</p>
+
+            <p>And in that moment, Aria realized that her life as a simple trainee was over. The destiny she'd been running from had finally caught up with her.</p>
+        </div>
+
+        <div class="reader-navigation">
+            <button class="btn-secondary" disabled>
+                <i class="fas fa-chevron-left"></i> Previous Chapter
+            </button>
+            <button class="btn-primary" onclick="window.location.href='reader.html?chapter=2'">
+                Next Chapter <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/reader.js"></script>
+</body>
+</html>

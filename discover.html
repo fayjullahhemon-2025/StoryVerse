@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Stories - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/discover.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="discover.html" class="nav-link active">Discover</a>
+                <a href="trending.html" class="nav-link">Trending</a>
+                <a href="#" class="nav-link" id="becomeWriter">Become a Writer</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <img src="assets/default-avatar.png" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="library.html"><i class="fas fa-book"></i> My Library</a>
+                        <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search & Filter Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for stories, authors, genres...">
+            </div>
+            <div class="filters">
+                <select id="genreFilter" class="filter-select">
+                    <option value="">All Genres</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="romance">Romance</option>
+                    <option value="scifi">Sci-Fi</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="horror">Horror</option>
+                </select>
+                <select id="statusFilter" class="filter-select">
+                    <option value="">All Status</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <select id="priceFilter" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="free">Free</option>
+                    <option value="premium">Premium</option>
+                </select>
+                <select id="sortFilter" class="filter-select">
+                    <option value="popular">Most Popular</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="newest">Newest</option>
+                    <option value="updated">Recently Updated</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="discover-content">
+        <div class="container">
+            <div class="results-header">
+                <h2 id="resultsCount">Showing all stories</h2>
+            </div>
+            <div class="books-grid" id="discoverBooks">
+                <!-- Books will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>StoryVerse</h4>
+                    <p>Empowering writers to share their stories and earn from their passion.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>For Writers</h4>
+                    <ul>
+                        <li><a href="creator-studio.html">Creator Studio</a></li>
+                        <li><a href="monetization.html">Monetization Guide</a></li>
+                        <li><a href="writer-agreement.html">Writer Agreement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Readers</h4>
+                    <ul>
+                        <li><a href="discover.html">Discover Stories</a></li>
+                        <li><a href="wallet.html">Buy Coins</a></li>
+                        <li><a href="library.html">My Library</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="dmca.html">DMCA Policy</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 StoryVerse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/discover.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/wallet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="discover.html" class="nav-link">Discover</a>
+                <a href="library.html" class="nav-link">My Library</a>
+            </div>
+            <div class="nav-actions">
+                <div class="user-menu" id="userMenu">
+                    <img src="assets/default-avatar.png" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="library.html"><i class="fas fa-book"></i> My Library</a>
+                        <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="wallet-header">
+        <div class="container">
+            <h1>My Wallet</h1>
+            <div class="wallet-balance">
+                <div class="balance-label">Current Balance</div>
+                <div class="balance-amount" id="coinBalance">0 Coins</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coin-packages">
+        <div class="container">
+            <h2>Buy Coins</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-coins"></i></div>
+                    <div class="package-coins">50 Coins</div>
+                    <div class="package-price">$4.99</div>
+                    <button class="btn-primary" onclick="buyCoins(50, 4.99)">Buy Now</button>
+                </div>
+                
+                <div class="package-card popular">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="package-icon"><i class="fas fa-coins"></i></div>
+                    <div class="package-coins">120 Coins</div>
+                    <div class="package-price">$9.99</div>
+                    <div class="package-bonus">+20 Bonus Coins</div>
+                    <button class="btn-primary" onclick="buyCoins(120, 9.99)">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-coins"></i></div>
+                    <div class="package-coins">250 Coins</div>
+                    <div class="package-price">$19.99</div>
+                    <div class="package-bonus">+50 Bonus Coins</div>
+                    <button class="btn-primary" onclick="buyCoins(250, 19.99)">Buy Now</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-coins"></i></div>
+                    <div class="package-coins">550 Coins</div>
+                    <div class="package-price">$39.99</div>
+                    <div class="package-bonus">+100 Bonus Coins</div>
+                    <button class="btn-primary" onclick="buyCoins(550, 39.99)">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="transaction-history">
+        <div class="container">
+            <h2>Transaction History</h2>
+            <div class="transactions-container" id="transactionsList">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    <i class="fas fa-receipt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <p>No transactions yet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>StoryVerse</h4>
+                    <p>Empowering writers to share their stories and earn from their passion.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>For Writers</h4>
+                    <ul>
+                        <li><a href="creator-studio.html">Creator Studio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Readers</h4>
+                    <ul>
+                        <li><a href="discover.html">Discover Stories</a></li>
+                        <li><a href="library.html">My Library</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 StoryVerse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/wallet.js"></script>
+</body>
+</html>

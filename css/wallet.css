@@ -1,0 +1,185 @@
+/* Wallet Page Styles */
+.wallet-header {
+    background-color: var(--dark-surface);
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.wallet-balance {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 2rem 4rem;
+    border-radius: 16px;
+    margin-top: 1rem;
+}
+
+.balance-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.coin-packages {
+    padding: 4rem 0;
+}
+
+.coin-packages h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.package-card {
+    background-color: var(--dark-surface);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.package-card.popular {
+    border-color: var(--warning-color);
+    position: relative;
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background-color: var(--warning-color);
+    color: var(--dark-bg);
+    padding: 0.25rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.package-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--warning-color);
+}
+
+.package-coins {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.package-price {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.package-bonus {
+    color: var(--success-color);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.transaction-history {
+    padding: 4rem 0;
+}
+
+.transaction-history h2 {
+    margin-bottom: 2rem;
+}
+
+.transactions-container {
+    background-color: var(--dark-surface);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.transaction-icon.purchase {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
+}
+
+.transaction-icon.spend {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--danger-color);
+}
+
+.transaction-details h4 {
+    margin-bottom: 0.25rem;
+}
+
+.transaction-date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.transaction-amount {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.transaction-amount.positive {
+    color: var(--success-color);
+}
+
+.transaction-amount.negative {
+    color: var(--danger-color);
+}
+
+@media (max-width: 768px) {
+    .wallet-balance {
+        padding: 1.5rem 2rem;
+    }
+    
+    .balance-amount {
+        font-size: 2rem;
+    }
+    
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
+}

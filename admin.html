@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/creator-studio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse Admin</span>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="window.location.href='index.html'">
+                    <i class="fas fa-home"></i> Back to Site
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="studio-container">
+        <aside class="studio-sidebar">
+            <div class="sidebar-menu">
+                <a href="#dashboard" class="sidebar-link active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#users" class="sidebar-link" data-section="users">
+                    <i class="fas fa-users"></i> Users
+                </a>
+                <a href="#books" class="sidebar-link" data-section="books">
+                    <i class="fas fa-book"></i> Books
+                </a>
+                <a href="#reports" class="sidebar-link" data-section="reports">
+                    <i class="fas fa-flag"></i> Reports
+                </a>
+                <a href="#revenue" class="sidebar-link" data-section="revenue">
+                    <i class="fas fa-chart-line"></i> Revenue
+                </a>
+                <a href="#settings" class="sidebar-link" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </div>
+        </aside>
+
+        <main class="studio-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="studio-section active">
+                <h1>Admin Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">125K</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">2.5M</div>
+                            <div class="stat-label">Published Books</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">50M</div>
+                            <div class="stat-label">Total Views</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">$125K</div>
+                            <div class="stat-label">Monthly Revenue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <i class="fas fa-user-plus" style="color: var(--success-color);"></i>
+                            <div class="activity-content">
+                                <div class="activity-text">523 new users registered today</div>
+                                <div class="activity-time">Updated 5 minutes ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-book" style="color: var(--primary-color);"></i>
+                            <div class="activity-content">
+                                <div class="activity-text">87 new books published</div>
+                                <div class="activity-time">Today</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-flag" style="color: var(--warning-color);"></i>
+                            <div class="activity-content">
+                                <div class="activity-text">12 content reports pending review</div>
+                                <div class="activity-time">Requires attention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="studio-section">
+                <h1>User Management</h1>
+                <div style="background-color: var(--dark-surface); border-radius: 12px; padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                        <input type="text" placeholder="Search users..." style="flex: 1; max-width: 400px; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--dark-border); background-color: var(--dark-bg); color: var(--text-primary);">
+                        <select style="padding: 0.75rem; border-radius: 8px; border: 1px solid var(--dark-border); background-color: var(--dark-bg); color: var(--text-primary);">
+                            <option>All Users</option>
+                            <option>Readers</option>
+                            <option>Writers</option>
+                            <option>Suspended</option>
+                        </select>
+                    </div>
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>sarah@example.com</td>
+                                <td>Writer</td>
+                                <td>Jan 15, 2026</td>
+                                <td><span class="status-badge status-completed">Active</span></td>
+                                <td>
+                                    <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Alex Chen</td>
+                                <td>alex@example.com</td>
+                                <td>Reader</td>
+                                <td>Feb 20, 2026</td>
+                                <td><span class="status-badge status-completed">Active</span></td>
+                                <td>
+                                    <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Books Section -->
+            <section id="books" class="studio-section">
+                <h1>Content Management</h1>
+                <div style="background-color: var(--dark-surface); border-radius: 12px; padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                        <input type="text" placeholder="Search books..." style="flex: 1; max-width: 400px; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--dark-border); background-color: var(--dark-bg); color: var(--text-primary);">
+                        <select style="padding: 0.75rem; border-radius: 8px; border: 1px solid var(--dark-border); background-color: var(--dark-bg); color: var(--text-primary);">
+                            <option>All Books</option>
+                            <option>Pending Review</option>
+                            <option>Published</option>
+                            <option>Flagged</option>
+                        </select>
+                    </div>
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Genre</th>
+                                <th>Views</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>The Last Kingdom</td>
+                                <td>Sarah Johnson</td>
+                                <td>Fantasy</td>
+                                <td>125K</td>
+                                <td><span class="status-badge status-completed">Published</span></td>
+                                <td>
+                                    <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Review</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Digital Dreams</td>
+                                <td>Maya Patel</td>
+                                <td>Sci-Fi</td>
+                                <td>89K</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>
+                                    <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Review</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="studio-section">
+                <h1>Content Reports</h1>
+                <div style="background-color: var(--dark-surface); border-radius: 12px; padding: 2rem;">
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Review and moderate flagged content</p>
+                    <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                        <i class="fas fa-flag" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p>No pending reports</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Revenue Section -->
+            <section id="revenue" class="studio-section">
+                <h1>Revenue Analytics</h1>
+                <div class="earnings-summary">
+                    <div class="earnings-card">
+                        <h3>Total Platform Revenue</h3>
+                        <div class="earnings-amount">$5.2M</div>
+                        <div class="earnings-detail">All time</div>
+                    </div>
+                    <div class="earnings-card">
+                        <h3>This Month</h3>
+                        <div class="earnings-amount">$125K</div>
+                        <div class="earnings-detail">+15% from last month</div>
+                    </div>
+                    <div class="earnings-card">
+                        <h3>Pending Payouts</h3>
+                        <div class="earnings-amount">$45K</div>
+                        <div class="earnings-detail">To 1,234 writers</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="studio-section">
+                <h1>Platform Settings</h1>
+                <div class="book-form">
+                    <div class="form-group">
+                        <label>Platform Name</label>
+                        <input type="text" value="StoryVerse">
+                    </div>
+                    <div class="form-group">
+                        <label>Revenue Share (Writer %)</label>
+                        <input type="number" value="70" min="0" max="100">
+                        <small>Percentage of revenue that goes to writers</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Minimum Payout Amount</label>
+                        <input type="number" value="50" min="0">
+                        <small>Minimum balance required for payout requests</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Content Moderation</label>
+                        <select>
+                            <option>Manual Review</option>
+                            <option>AI-Assisted</option>
+                            <option>Auto-Approve</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary btn-large">Save Settings</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Setup sidebar navigation
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('.studio-section');
+        
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+                
+                this.classList.add('active');
+                
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
