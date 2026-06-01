@@ -27,7 +27,7 @@ function loadChapters() {
             </div>
             <div class="chapter-status">
                 ${chapter.isFree ? 
-                    '<span style="color: var(--success-color); font-weight: 600;">FREE</span>' : 
+                    '<span class="chapter-free"><i class="fas fa-check"></i> FREE</span>' : 
                     `<i class="fas fa-lock chapter-lock"></i>
                      <span class="chapter-price">${chapter.price} coins</span>`
                 }

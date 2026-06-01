@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/book.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -42,8 +45,9 @@
     <section class="book-header">
         <div class="container">
             <div class="book-header-content">
-                <div class="book-header-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white;">
-                    <i class="fas fa-crown"></i>
+                <div class="book-header-cover">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop" alt="The Last Kingdom">
+                    <div class="book-cover-badge">Premium</div>
                 </div>
                 <div class="book-header-info">
                     <h1>The Last Kingdom</h1>
@@ -171,8 +175,42 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
     <script src="js/book.js"></script>
+    <script>
+        // Book page animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.from('.book-header-cover', {
+            duration: 1,
+            scale: 0.8,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.book-header-info > *', {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+        
+        gsap.from('.chapter-item', {
+            scrollTrigger: {
+                trigger: '.chapters-list',
+                start: 'top 80%'
+            },
+            duration: 0.6,
+            y: 30,
+            opacity: 0,
+            stagger: 0.05,
+            ease: 'power2.out'
+        });
+    </script>
 </body>
 </html>

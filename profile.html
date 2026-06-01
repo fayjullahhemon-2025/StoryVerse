@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - StoryVerse</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .profile-container {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .profile-header {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-avatar-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #62ab00;
+            box-shadow: 0 4px 15px rgba(98, 171, 0, 0.3);
+        }
+
+        .profile-info-section {
+            flex: 1;
+        }
+
+        .profile-info-section h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: var(--font-heading);
+        }
+
+        .profile-role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .profile-role-badge.reader {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #ffffff;
+        }
+
+        .profile-role-badge.writer {
+            background: linear-gradient(135deg, #62ab00, #4d8800);
+            color: #ffffff;
+        }
+
+        .profile-role-badge.admin {
+            background: linear-gradient(135deg, #bd0018, #8b0012);
+            color: #ffffff;
+        }
+
+        .profile-meta {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-bio {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 15px 0 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #62ab00;
+        }
+
+        .quick-stats-bar {
+            display: flex;
+            gap: 30px;
+            padding: 20px 0;
+            border-top: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #62ab00;
+            font-family: var(--font-heading);
+        }
+
+        .quick-stat-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #62ab00;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(98, 171, 0, 0.15);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            font-family: var(--font-heading);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 24px;
+            color: #62ab00;
+            margin-bottom: 10px;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 700;
+        }
+
+        .activity-feed {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: #f8f9fa;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.read { background: #e3f2fd; color: #2196f3; }
+        .activity-icon.write { background: #e8f5e9; color: #4caf50; }
+        .activity-icon.earn { background: #fff3e0; color: #ff9800; }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .progress-value {
+            color: #62ab00;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #62ab00, #4d8800);
+            transition: width 0.3s;
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 968px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .quick-stats-bar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>StoryVerse</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="discover.html" class="nav-link">Discover</a>
+                <a href="trending.html" class="nav-link">Trending</a>
+            </div>
+            <div class="nav-actions">
+                <div class="user-menu" id="userMenu">
+                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=62ab00&color=fff" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="library.html"><i class="fas fa-book"></i> My Library</a>
+                        <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
+                        <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-shield-alt"></i> Admin Panel</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="profile-container">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar-section">
+                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=62ab00&color=fff&size=150" alt="Profile" class="profile-avatar-large" id="profileAvatarLarge">
+                    <button class="btn-secondary" style="margin-top: 1rem;">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                </div>
+                <div class="profile-info-section">
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                        <h1 id="profileName">Demo User</h1>
+                        <div class="profile-role-badge" id="roleBadge">
+                            <i class="fas fa-user"></i> Reader
+                        </div>
+                    </div>
+                    <p class="profile-meta"><i class="fas fa-envelope"></i> <span id="profileEmail">demo@storyverse.com</span></p>
+                    <p class="profile-meta"><i class="fas fa-calendar-alt"></i> Member since <span id="joinDate">May 2026</span></p>
+                    <p class="profile-bio" id="profileBio">Welcome to StoryVerse!</p>
+                    
+                    <!-- Quick Stats Bar -->
+                    <div class="quick-stats-bar" id="quickStatsBar"></div>
+                    
+                    <!-- Role-specific actions -->
+                    <div class="profile-actions" id="profileActions"></div>
+                </div>
+            </div>
+
+            <!-- Role-specific Content -->
+            <div id="roleContent"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>StoryVerse</h4>
+                    <p>Empowering writers to share their stories and earn from their passion.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>For Writers</h4>
+                    <ul>
+                        <li><a href="creator-studio.html">Creator Studio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>For Readers</h4>
+                    <ul>
+                        <li><a href="discover.html">Discover Stories</a></li>
+                        <li><a href="wallet.html">Buy Coins</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 StoryVerse. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Demo user data
+        const demoUsers = {
+            reader: {
+                name: 'Alex Reader',
+                email: 'reader@storyverse.com',
+                role: 'reader',
+                avatar: 'https://ui-avatars.com/api/?name=Alex+Reader&background=3b82f6&color=fff&size=150',
+                joinDate: 'January 15, 2026',
+                bio: 'Avid reader and book enthusiast. Love fantasy, sci-fi, and romance novels. Always looking for the next great story!',
+                stats: {
+                    booksRead: 24,
+                    chaptersRead: 342,
+                    coinsSpent: 1250,
+                    readingStreak: 15,
+                    favoriteGenre: 'Fantasy',
+                    totalReadingTime: '127 hours',
+                    reviewsWritten: 18,
+                    booksInLibrary: 47,
+                    avgRating: 4.5
+                },
+                recentActivity: [
+                    { type: 'read', text: 'Finished reading "The Last Kingdom" Chapter 5', time: '2 hours ago' },
+                    { type: 'read', text: 'Added "Dragon\'s Legacy" to library', time: '1 day ago' },
+                    { type: 'read', text: 'Left a 5-star review on "Shadows of Tomorrow"', time: '2 days ago' },
+                    { type: 'read', text: 'Unlocked Chapter 12 of "Eternal Flames"', time: '3 days ago' },
+                    { type: 'read', text: 'Completed "Whispers in the Dark"', time: '5 days ago' }
+                ]
+            },
+            writer: {
+                name: 'Sarah Writer',
+                email: 'writer@storyverse.com',
+                role: 'writer',
+                avatar: 'https://ui-avatars.com/api/?name=Sarah+Writer&background=62ab00&color=fff&size=150',
+                joinDate: 'March 10, 2025',
+                bio: 'Fantasy and adventure writer. Published author with 3 ongoing series. Passionate about creating immersive worlds and compelling characters.',
+                stats: {
+                    booksPublished: 3,
+                    totalChapters: 87,
+                    totalViews: 125000,
+                    totalEarnings: 4250,
+                    followers: 1842,
+                    avgRating: 4.7,
+                    totalReviews: 342,
+                    monthlyViews: 15420,
+                    monthlyEarnings: 850,
+                    nextPayout: 850,
+                    completionRate: 68,
+                    avgChapterViews: 1437
+                },
+                recentActivity: [
+                    { type: 'write', text: 'Published Chapter 30 of "The Last Kingdom"', time: '3 hours ago' },
+                    { type: 'earn', text: 'Earned $125 from chapter unlocks', time: '1 day ago' },
+                    { type: 'write', text: 'Gained 50 new followers', time: '2 days ago' },
+                    { type: 'write', text: 'Reached 100K total views milestone', time: '5 days ago' },
+                    { type: 'earn', text: 'Received payout of $750', time: '1 week ago' }
+                ]
+            },
+            admin: {
+                name: 'Admin User',
+                email: 'admin@storyverse.com',
+                role: 'admin',
+                avatar: 'https://ui-avatars.com/api/?name=Admin+User&background=bd0018&color=fff&size=150',
+                joinDate: 'January 1, 2025',
+                bio: 'Platform administrator managing content, users, and ensuring a safe and thriving community.',
+                stats: {
+                    totalUsers: 15420,
+                    totalBooks: 3842,
+                    activeWriters: 892,
+                    pendingReports: 12,
+                    platformRevenue: 125000,
+                    newUsersToday: 47,
+                    activeReaders: 8234,
+                    approvedBooks: 3830
+                },
+                recentActivity: []
+            }
+        };
+
+        // Get current user role
+        const urlParams = new URLSearchParams(window.location.search);
+        const userRole = urlParams.get('role') || 'reader';
+        const currentUser = demoUsers[userRole];
+
+        // Load profile
+        function loadProfile() {
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').querySelector('span').textContent = currentUser.email;
+            document.getElementById('joinDate').textContent = currentUser.joinDate;
+            document.getElementById('profileBio').textContent = currentUser.bio;
+            document.getElementById('profileAvatarLarge').src = currentUser.avatar;
+            document.getElementById('userAvatar').src = currentUser.avatar;
+
+            const roleBadge = document.getElementById('roleBadge');
+            roleBadge.className = `profile-role-badge ${currentUser.role}`;
+            
+            if (currentUser.role === 'reader') {
+                roleBadge.innerHTML = '<i class="fas fa-book-reader"></i> Reader';
+            } else if (currentUser.role === 'writer') {
+                roleBadge.innerHTML = '<i class="fas fa-pen-fancy"></i> Writer';
+                document.getElementById('creatorStudioLink').style.display = 'block';
+            } else if (currentUser.role === 'admin') {
+                roleBadge.innerHTML = '<i class="fas fa-shield-alt"></i> Administrator';
+                document.getElementById('creatorStudioLink').style.display = 'block';
+                document.getElementById('adminLink').style.display = 'block';
+            }
+
+            loadQuickStats();
+            loadRoleContent();
+        }
+
+        function loadQuickStats() {
+            const container = document.getElementById('quickStatsBar');
+            
+            if (currentUser.role === 'reader') {
+                container.innerHTML = `
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.booksRead}</div>
+                        <div class="quick-stat-label">Books Read</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.readingStreak}</div>
+                        <div class="quick-stat-label">Day Streak</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.reviewsWritten}</div>
+                        <div class="quick-stat-label">Reviews</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.avgRating}</div>
+                        <div class="quick-stat-label">Avg Rating</div>
+                    </div>
+                `;
+            } else if (currentUser.role === 'writer') {
+                container.innerHTML = `
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.booksPublished}</div>
+                        <div class="quick-stat-label">Books</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${(currentUser.stats.totalViews / 1000).toFixed(0)}K</div>
+                        <div class="quick-stat-label">Total Views</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.followers}</div>
+                        <div class="quick-stat-label">Followers</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">$${currentUser.stats.monthlyEarnings}</div>
+                        <div class="quick-stat-label">This Month</div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${(currentUser.stats.totalUsers / 1000).toFixed(1)}K</div>
+                        <div class="quick-stat-label">Users</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.activeWriters}</div>
+                        <div class="quick-stat-label">Writers</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${currentUser.stats.pendingReports}</div>
+                        <div class="quick-stat-label">Reports</div>
+                    </div>
+                `;
+            }
+        }
+
+        function loadRoleContent() {
+            const actionsContainer = document.getElementById('profileActions');
+            const contentContainer = document.getElementById('roleContent');
+
+            if (currentUser.role === 'reader') {
+                actionsContainer.innerHTML = `
+                    <button class="btn-primary" onclick="window.location.href='library.html'">
+                        <i class="fas fa-book"></i> My Library
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='wallet.html'">
+                        <i class="fas fa-wallet"></i> My Wallet
+                    </button>
+                    <button class="btn-secondary" onclick="becomeWriter()">
+                        <i class="fas fa-pen"></i> Become a Writer
+                    </button>
+                `;
+
+                contentContainer.innerHTML = `
+                    <div class="two-column-layout">
+                        <div>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                                    <h3>Books Read</h3>
+                                    <div class="stat-value">${currentUser.stats.booksRead}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
+                                    <h3>Chapters Read</h3>
+                                    <div class="stat-value">${currentUser.stats.chaptersRead}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                                    <h3>Coins Spent</h3>
+                                    <div class="stat-value">${currentUser.stats.coinsSpent}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                                    <h3>Reading Streak</h3>
+                                    <div class="stat-value">${currentUser.stats.readingStreak} days</div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <h3><i class="fas fa-chart-bar"></i> Reading Statistics</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Favorite Genre</span>
+                                    <span class="info-value">${currentUser.stats.favoriteGenre}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Total Reading Time</span>
+                                    <span class="info-value">${currentUser.stats.totalReadingTime}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Reviews Written</span>
+                                    <span class="info-value">${currentUser.stats.reviewsWritten}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Books in Library</span>
+                                    <span class="info-value">${currentUser.stats.booksInLibrary}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Average Rating Given</span>
+                                    <span class="info-value">${currentUser.stats.avgRating} ⭐</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="activity-feed">
+                                <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                                ${currentUser.recentActivity.map(activity => `
+                                    <div class="activity-item">
+                                        <div class="activity-icon ${activity.type}">
+                                            <i class="fas fa-${activity.type === 'read' ? 'book-open' : 'star'}"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-text">${activity.text}</div>
+                                            <div class="activity-time">${activity.time}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (currentUser.role === 'writer') {
+                actionsContainer.innerHTML = `
+                    <button class="btn-primary" onclick="window.location.href='creator-studio.html?role=writer'">
+                        <i class="fas fa-pen"></i> Creator Studio
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='wallet.html'">
+                        <i class="fas fa-wallet"></i> Earnings & Wallet
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='library.html'">
+                        <i class="fas fa-book"></i> My Library
+                    </button>
+                `;
+
+                contentContainer.innerHTML = `
+                    <div class="two-column-layout">
+                        <div>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                                    <h3>Books Published</h3>
+                                    <div class="stat-value">${currentUser.stats.booksPublished}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                                    <h3>Total Chapters</h3>
+                                    <div class="stat-value">${currentUser.stats.totalChapters}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                                    <h3>Total Views</h3>
+                                    <div class="stat-value">${currentUser.stats.totalViews.toLocaleString()}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <h3>Total Earnings</h3>
+                                    <div class="stat-value">$${currentUser.stats.totalEarnings.toLocaleString()}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                                    <h3>Followers</h3>
+                                    <div class="stat-value">${currentUser.stats.followers.toLocaleString()}</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                                    <h3>Average Rating</h3>
+                                    <div class="stat-value">${currentUser.stats.avgRating}</div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <h3><i class="fas fa-chart-line"></i> Performance Metrics</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Monthly Views</span>
+                                    <span class="info-value">${currentUser.stats.monthlyViews.toLocaleString()}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Monthly Earnings</span>
+                                    <span class="info-value">$${currentUser.stats.monthlyEarnings}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Avg Chapter Views</span>
+                                    <span class="info-value">${currentUser.stats.avgChapterViews.toLocaleString()}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Total Reviews</span>
+                                    <span class="info-value">${currentUser.stats.totalReviews}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Reader Completion Rate</span>
+                                    <span class="info-value">${currentUser.stats.completionRate}%</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <h3><i class="fas fa-money-bill-wave"></i> Earnings Breakdown</h3>
+                                <div class="progress-item">
+                                    <div class="progress-header">
+                                        <span class="progress-label">Next Payout</span>
+                                        <span class="progress-value">$${currentUser.stats.nextPayout}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: ${(currentUser.stats.nextPayout / 1000) * 100}%"></div>
+                                    </div>
+                                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Minimum payout: $1000</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="activity-feed">
+                                <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                                ${currentUser.recentActivity.map(activity => `
+                                    <div class="activity-item">
+                                        <div class="activity-icon ${activity.type}">
+                                            <i class="fas fa-${activity.type === 'write' ? 'pen' : activity.type === 'earn' ? 'dollar-sign' : 'star'}"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-text">${activity.text}</div>
+                                            <div class="activity-time">${activity.time}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                actionsContainer.innerHTML = `
+                    <button class="btn-primary" onclick="window.location.href='admin.html'">
+                        <i class="fas fa-shield-alt"></i> Admin Panel
+                    </button>
+                `;
+
+                contentContainer.innerHTML = `
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <h3>Total Users</h3>
+                            <div class="stat-value">${currentUser.stats.totalUsers.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-book"></i></div>
+                            <h3>Total Books</h3>
+                            <div class="stat-value">${currentUser.stats.totalBooks.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-pen"></i></div>
+                            <h3>Active Writers</h3>
+                            <div class="stat-value">${currentUser.stats.activeWriters.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-flag"></i></div>
+                            <h3>Pending Reports</h3>
+                            <div class="stat-value">${currentUser.stats.pendingReports}</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function becomeWriter() {
+            if (confirm('Do you want to become a writer? You will get access to Creator Studio to publish your stories.')) {
+                window.location.href = 'profile.html?role=writer';
+            }
+        }
+
+        // Dropdown menu
+        const userAvatar = document.getElementById('userAvatar');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        if (userAvatar && dropdownMenu) {
+            userAvatar.onclick = function() {
+                dropdownMenu.classList.toggle('show');
+            };
+        }
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            };
+        }
+
+        // Initialize
+        loadProfile();
+    </script>
+</body>
+</html>
