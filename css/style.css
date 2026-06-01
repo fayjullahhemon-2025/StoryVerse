@@ -108,6 +108,7 @@ h4 {
 
 .nav-menu {
     display: flex;
+    align-items: center;
     gap: var(--spacing-6);
 }
 

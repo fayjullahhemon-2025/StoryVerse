@@ -1,7 +1,119 @@
 // Book Page Logic
+let customBook = null;
+let bookId = null;
+let isPreview = false;
+
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    bookId = urlParams.get('id');
+    isPreview = urlParams.get('preview') === 'true';
+
+    if (bookId) {
+        const books = JSON.parse(localStorage.getItem('myBooks') || '[]');
+        customBook = books.find(b => b.id === bookId);
+        
+        if (customBook) {
+            renderCustomBookDetails();
+        }
+    }
+    
+    // Load chapters
     loadChapters();
+    
+    // Render sticky writer preview banner
+    if (isPreview) {
+        renderPreviewBanner();
+    }
 });
+
+function renderCustomBookDetails() {
+    document.title = `${customBook.title} - StoryVerse`;
+    
+    const titleHeader = document.querySelector('.book-header-info h1');
+    if (titleHeader) titleHeader.textContent = customBook.title;
+    
+    const authorLink = document.querySelector('.book-author-link');
+    if (authorLink) {
+        authorLink.textContent = `by ${customBook.author || 'Anonymous Writer'}`;
+        authorLink.href = '#';
+    }
+    
+    const coverContainer = document.querySelector('.book-header-cover');
+    if (coverContainer) {
+        coverContainer.innerHTML = `
+            <div style="width: 100%; height: 100%; background: ${customBook.coverGradient || 'linear-gradient(135deg, #667eea, #764ba2)'}; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; text-align: center; padding: 20px; font-size: 1.4rem; font-family: var(--font-heading); box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+                ${customBook.title}
+            </div>
+            <div class="book-cover-badge" style="background-color: var(--color-success);">Custom</div>
+        `;
+    }
+    
+    const synopsisContainer = document.querySelector('.book-synopsis p');
+    if (synopsisContainer) {
+        synopsisContainer.textContent = customBook.synopsis;
+        const siblingParagraphs = document.querySelectorAll('.book-synopsis p ~ p');
+        siblingParagraphs.forEach(p => p.remove());
+    }
+    
+    const tagsContainer = document.querySelector('.book-tags');
+    if (tagsContainer) {
+        const ratingLabel = customBook.ageRating === 'mature' ? 'Mature (18+)' : customBook.ageRating === 'teen' ? 'Teen (13+)' : 'General';
+        tagsContainer.innerHTML = `
+            <span class="tag" style="text-transform: capitalize;">${customBook.genre}</span>
+            <span class="tag">Ongoing</span>
+            <span class="tag">${ratingLabel}</span>
+        `;
+    }
+    
+    const statsContainer = document.querySelector('.book-stats');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <div class="book-stat">
+                <i class="fas fa-star" style="color: #eccd00;"></i>
+                <span>${customBook.rating || 0.0} (0 reviews)</span>
+            </div>
+            <div class="book-stat">
+                <i class="fas fa-eye" style="color: var(--color-success);"></i>
+                <span>${customBook.views || 0} views</span>
+            </div>
+            <div class="book-stat">
+                <i class="fas fa-book-open" style="color: var(--color-primary);"></i>
+                <span>${customBook.chapters || 0} chapters</span>
+            </div>
+        `;
+    }
+}
+
+function renderPreviewBanner() {
+    const banner = document.createElement('div');
+    banner.style.position = 'sticky';
+    banner.style.top = '0';
+    banner.style.zIndex = '99999';
+    banner.style.backgroundColor = 'var(--color-success)';
+    banner.style.color = '#ffffff';
+    banner.style.textAlign = 'center';
+    banner.style.padding = '12px 20px';
+    banner.style.fontWeight = '700';
+    banner.style.fontSize = '0.95rem';
+    banner.style.boxShadow = '0 4px 15px rgba(98, 171, 0, 0.3)';
+    banner.style.fontFamily = 'var(--font-body)';
+    banner.innerHTML = `
+        <i class="fas fa-eye" style="margin-right: 8px;"></i> 
+        Writer Preview Mode — Reader Perspective 
+        <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; margin-left: 12px; font-weight: 800; border: 1px solid rgba(255,255,255,0.3);">
+            Bypassing Wallet Lockouts
+        </span>
+        <button onclick="window.close()" style="background: transparent; border: 1px solid rgba(255,255,255,0.6); color: white; border-radius: 4px; padding: 2px 8px; font-size: 0.75rem; margin-left: 15px; font-weight: 700; cursor: pointer; float: right;">
+            Close Preview
+        </button>
+    `;
+    document.body.insertBefore(banner, document.body.firstChild);
+    
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.style.top = '45px';
+    }
+}
 
 let currentChapterToUnlock = null;
 let currentChapterPrice = 0;
@@ -13,40 +125,78 @@ function loadChapters() {
     const container = document.getElementById('chaptersList');
     if (!container) return;
 
-    const chapters = [
-        { number: 1, title: 'The Awakening', date: 'May 1, 2026', isFree: true },
-        { number: 2, title: 'The Sword of Destiny', date: 'May 3, 2026', isFree: true },
-        { number: 3, title: 'Betrayal in the Night', date: 'May 5, 2026', isFree: true },
-        { number: 4, title: 'The Mage\'s Secret', date: 'May 7, 2026', isFree: false, price: 10 },
-        { number: 5, title: 'Journey to the North', date: 'May 9, 2026', isFree: false, price: 10 },
-        { number: 6, title: 'The Dragon\'s Lair', date: 'May 11, 2026', isFree: false, price: 10 },
-        { number: 7, title: 'Allies and Enemies', date: 'May 13, 2026', isFree: false, price: 15 },
-        { number: 8, title: 'The Dark Lord Rises', date: 'May 15, 2026', isFree: false, price: 15 }
-    ];
+    let chapters = [];
+    
+    if (customBook) {
+        chapters = JSON.parse(localStorage.getItem('bookChapters_' + bookId) || '[]');
+        chapters.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+    } else {
+        chapters = [
+            { number: 1, title: 'The Awakening', date: 'May 1, 2026', isFree: true },
+            { number: 2, title: 'The Sword of Destiny', date: 'May 3, 2026', isFree: true },
+            { number: 3, title: 'Betrayal in the Night', date: 'May 5, 2026', isFree: true },
+            { number: 4, title: 'The Mage\'s Secret', date: 'May 7, 2026', isFree: false, price: 10 },
+            { number: 5, title: 'Journey to the North', date: 'May 9, 2026', isFree: false, price: 10 },
+            { number: 6, title: 'The Dragon\'s Lair', date: 'May 11, 2026', isFree: false, price: 10 },
+            { number: 7, title: 'Allies and Enemies', date: 'May 13, 2026', isFree: false, price: 15 },
+            { number: 8, title: 'The Dark Lord Rises', date: 'May 15, 2026', isFree: false, price: 15 }
+        ];
+    }
 
-    container.innerHTML = chapters.map(chapter => `
-        <div class="chapter-item" onclick="readChapter(${chapter.number}, ${chapter.isFree}, ${chapter.price || 0}, '${chapter.title.replace(/'/g, "\\'")}')">
-            <div class="chapter-info">
-                <div class="chapter-number">Chapter ${chapter.number}</div>
-                <div class="chapter-title">${chapter.title}</div>
-                <div class="chapter-meta">Published ${chapter.date}</div>
+    if (chapters.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary); width: 100%;">
+                <i class="fas fa-file-pdf" style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--border-color); display: block;"></i>
+                <p style="font-weight:700; font-size:1.1rem; color:var(--text-primary); margin-bottom:0.5rem;">No Chapters Published</p>
+                <p style="font-size:0.9rem; max-width:350px; margin:0 auto;">This writer hasn't uploaded any chapters for this story yet.</p>
             </div>
-            <div class="chapter-status">
-                ${chapter.isFree ? 
-                    '<span class="chapter-free"><i class="fas fa-check"></i> FREE</span>' : 
-                    `<i class="fas fa-lock chapter-lock"></i>
-                     <span class="chapter-price">৳${chapter.price}</span>`
-                }
+        `;
+        return;
+    }
+
+    container.innerHTML = chapters.map(chapter => {
+        const escapedTitle = chapter.title.replace(/'/g, "\\'");
+        return `
+            <div class="chapter-item" onclick="readChapter(${chapter.number}, ${chapter.isFree}, ${chapter.price || 0}, '${escapedTitle}')">
+                <div class="chapter-info">
+                    <div class="chapter-number">Chapter ${chapter.number}</div>
+                    <div class="chapter-title">${chapter.title}</div>
+                    <div class="chapter-meta">Published ${chapter.date || 'Today'}</div>
+                </div>
+                <div class="chapter-status">
+                    ${chapter.isFree ? 
+                        '<span class="chapter-free"><i class="fas fa-check"></i> FREE</span>' : 
+                        `<i class="fas fa-lock chapter-lock"></i>
+                         <span class="chapter-price">৳${chapter.price}</span>`
+                    }
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function startReading() {
-    readChapter(1, true, 0, 'The Awakening');
+    if (customBook) {
+        const chapters = JSON.parse(localStorage.getItem('bookChapters_' + bookId) || '[]');
+        if (chapters.length > 0) {
+            chapters.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+            const firstChapter = chapters[0];
+            readChapter(firstChapter.number, firstChapter.isFree, firstChapter.price || 0, firstChapter.title);
+        } else {
+            alert('No chapters available to read yet.');
+        }
+    } else {
+        readChapter(1, true, 0, 'The Awakening');
+    }
 }
 
 function readChapter(chapterNum, isFree, price, title) {
+    if (isPreview) {
+        // Writer Preview Mode - ALWAYS bypass lock checks and open reader in preview
+        window.location.href = `reader.html?bookId=${bookId}&chapter=${chapterNum}&preview=true`;
+        return;
+    }
+    
     if (!isFree) {
         // Store chapter info
         currentChapterToUnlock = chapterNum;
@@ -68,10 +218,13 @@ function readChapter(chapterNum, isFree, price, title) {
         
         const modal = document.getElementById('paymentModal');
         modal.style.display = 'flex';
-        // Allow layout to calculate before adding active class
         setTimeout(() => modal.classList.add('active'), 10);
     } else {
-        window.location.href = `reader.html?chapter=${chapterNum}`;
+        if (customBook) {
+            window.location.href = `reader.html?bookId=${bookId}&chapter=${chapterNum}`;
+        } else {
+            window.location.href = `reader.html?chapter=${chapterNum}`;
+        }
     }
 }
 

@@ -14,14 +14,27 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand">
+            <a href="index.html" class="nav-brand" style="text-decoration:none;">
                 <i class="fas fa-book-open"></i>
                 <span>StoryVerse</span>
-            </div>
+            </a>
             <div class="nav-actions">
-                <button class="btn-secondary" onclick="window.location.href='book.html'">
-                    <i class="fas fa-arrow-left"></i> Back to Book
+                <button class="btn-secondary" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i> Back
                 </button>
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <img src="https://ui-avatars.com/api/?name=User&background=eccd00&color=282828" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="library.html"><i class="fas fa-book"></i> My Library</a>
+                        <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -129,5 +142,15 @@
             ease: 'power2.out'
         });
     </script>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

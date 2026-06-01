@@ -21,15 +21,20 @@
             <div class="nav-menu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="discover.html" class="nav-link">Discover</a>
-                <a href="creator-studio.html" class="nav-link active">Creator Studio</a>
+                <a href="trending.html" class="nav-link">Trending</a>
+                <a href="library.html" class="nav-link">My Library</a>
+                <a href="wallet.html" class="nav-link">Wallet</a>
             </div>
             <div class="nav-actions">
-                <div class="user-menu" id="userMenu">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
                     <img src="https://ui-avatars.com/api/?name=User&background=eccd00&color=282828" alt="User" class="user-avatar" id="userAvatar">
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
                         <a href="library.html"><i class="fas fa-book"></i> My Library</a>
                         <a href="wallet.html"><i class="fas fa-wallet"></i> Wallet</a>
+                        <a href="creator-studio.html" id="creatorStudioLink" style="display: none;"><i class="fas fa-pen"></i> Creator Studio</a>
                         <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
                         <hr>
                         <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -55,7 +60,7 @@
                     <i class="fas fa-chart-bar"></i> Analytics
                 </a>
                 <a href="#earnings" class="sidebar-link" data-section="earnings">
-                    <i class="fas fa-dollar-sign"></i> Earnings
+                    <i class="fas fa-coins"></i> Earnings
                 </a>
             </div>
         </aside>
@@ -94,10 +99,10 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
-                            <i class="fas fa-dollar-sign"></i>
+                            <i class="fas fa-taka-sign"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-value">$1,245</div>
+                            <div class="stat-value">৳1,245</div>
                             <div class="stat-label">This Month</div>
                         </div>
                     </div>
@@ -184,20 +189,106 @@
 
             <!-- Analytics Section -->
             <section id="analytics" class="studio-section">
-                <h1>Analytics</h1>
+                <h1>Analytics & Insights</h1>
                 <div class="analytics-container">
-                    <div class="chart-card">
-                        <h3>Views Over Time</h3>
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--text-muted);"></i>
-                            <p>Chart visualization would go here</p>
+                    <div class="chart-card animate-card">
+                        <div class="chart-header">
+                            <h3>Views Over Time</h3>
+                            <div class="chart-period">Last 6 Months</div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <svg viewBox="0 0 500 250" class="svg-chart">
+                                <defs>
+                                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="var(--color-success)" stop-opacity="0.3"/>
+                                        <stop offset="100%" stop-color="var(--color-success)" stop-opacity="0.0"/>
+                                    </linearGradient>
+                                    <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stop-color="var(--primary-color)"/>
+                                        <stop offset="100%" stop-color="var(--color-success)"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Grid Lines -->
+                                <line x1="50" y1="40" x2="470" y2="40" stroke="var(--dark-border)" stroke-dasharray="4" opacity="0.3" />
+                                <line x1="50" y1="90" x2="470" y2="90" stroke="var(--dark-border)" stroke-dasharray="4" opacity="0.3" />
+                                <line x1="50" y1="140" x2="470" y2="140" stroke="var(--dark-border)" stroke-dasharray="4" opacity="0.3" />
+                                <line x1="50" y1="190" x2="470" y2="190" stroke="var(--dark-border)" stroke-dasharray="4" opacity="0.3" />
+                                <line x1="50" y1="215" x2="470" y2="215" stroke="var(--dark-border)" opacity="0.5" />
+                                
+                                <!-- Y Axis Labels -->
+                                <text x="15" y="45" fill="var(--text-muted)" font-size="10" font-weight="600">12.5K</text>
+                                <text x="20" y="95" fill="var(--text-muted)" font-size="10" font-weight="600">8.0K</text>
+                                <text x="20" y="145" fill="var(--text-muted)" font-size="10" font-weight="600">4.0K</text>
+                                <text x="20" y="195" fill="var(--text-muted)" font-size="10" font-weight="600">1.0K</text>
+                                <text x="25" y="218" fill="var(--text-muted)" font-size="10" font-weight="600">0</text>
+                                
+                                <!-- Area under path -->
+                                <path d="M 50 215 L 50 180 Q 110 130 134 140 T 218 80 T 302 120 T 386 60 T 470 45 L 470 215 Z" fill="url(#chartGradient)" />
+                                
+                                <!-- Glowing Line Path -->
+                                <path d="M 50 180 Q 110 130 134 140 T 218 80 T 302 120 T 386 60 T 470 45" fill="none" stroke="url(#lineGradient)" stroke-width="4" stroke-linecap="round" />
+                                
+                                <!-- Data Points -->
+                                <circle cx="50" cy="180" r="5" fill="var(--primary-color)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+                                <circle cx="134" cy="140" r="5" fill="var(--primary-color)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+                                <circle cx="218" cy="80" r="5" fill="var(--color-success)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+                                <circle cx="302" cy="120" r="5" fill="var(--color-success)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+                                <circle cx="386" cy="60" r="5" fill="var(--color-success)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+                                <circle cx="470" cy="45" r="5" fill="var(--color-success)" stroke="var(--bg-main)" stroke-width="2" class="chart-point" />
+
+                                <!-- X Axis Labels -->
+                                <text x="50" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">Jan</text>
+                                <text x="134" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">Feb</text>
+                                <text x="218" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">Mar</text>
+                                <text x="302" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">Apr</text>
+                                <text x="386" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">May</text>
+                                <text x="470" y="235" fill="var(--text-secondary)" font-size="11" font-weight="600" text-anchor="middle">Jun</text>
+                            </svg>
                         </div>
                     </div>
-                    <div class="chart-card">
-                        <h3>Reader Demographics</h3>
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-pie" style="font-size: 3rem; color: var(--text-muted);"></i>
-                            <p>Chart visualization would go here</p>
+                    
+                    <div class="chart-card animate-card">
+                        <div class="chart-header">
+                            <h3>Reader Demographics</h3>
+                            <div class="chart-period">By Age Group</div>
+                        </div>
+                        <div class="chart-wrapper donut-container">
+                            <svg viewBox="0 0 200 200" class="donut-chart">
+                                <!-- Background circle track -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="var(--dark-border)" stroke-width="20" opacity="0.3" />
+                                <!-- 55% Teen Segment (Dasharray calculations: Circumference = 2 * pi * 70 = 439.8) -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-success)" stroke-width="20" 
+                                        stroke-dasharray="241.9 439.8" stroke-dashoffset="0" transform="rotate(-90 100 100)" stroke-linecap="round" />
+                                
+                                <!-- 30% Young Adult Segment -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="var(--primary-color)" stroke-width="20" 
+                                        stroke-dasharray="131.9 439.8" stroke-dashoffset="-241.9" transform="rotate(-90 100 100)" stroke-linecap="round" />
+                                
+                                <!-- 15% General Segment -->
+                                <circle cx="100" cy="100" r="70" fill="none" stroke="var(--color-secondary)" stroke-width="20" 
+                                        stroke-dasharray="66.0 439.8" stroke-dashoffset="-373.8" transform="rotate(-90 100 100)" stroke-linecap="round" />
+                                
+                                <!-- Middle labels -->
+                                <text x="100" y="95" text-anchor="middle" font-size="24" font-weight="700" fill="var(--text-primary)">55%</text>
+                                <text x="100" y="115" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text-muted)" letter-spacing="1">TEEN (13+)</text>
+                            </svg>
+                            <div class="donut-legend">
+                                <div class="legend-item">
+                                    <span class="legend-dot" style="background-color: var(--color-success)"></span>
+                                    <span class="legend-label">Teen (13+)</span>
+                                    <span class="legend-value">55%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot" style="background-color: var(--primary-color)"></span>
+                                    <span class="legend-label">Young Adult</span>
+                                    <span class="legend-value">30%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot" style="background-color: var(--color-secondary)"></span>
+                                    <span class="legend-label">Mature (18+)</span>
+                                    <span class="legend-value">15%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,12 +300,12 @@
                 <div class="earnings-summary">
                     <div class="earnings-card">
                         <h3>Total Earnings</h3>
-                        <div class="earnings-amount">$5,432.50</div>
+                        <div class="earnings-amount">৳5,432.50</div>
                         <div class="earnings-detail">70% revenue share</div>
                     </div>
                     <div class="earnings-card">
                         <h3>Available Balance</h3>
-                        <div class="earnings-amount">$1,245.00</div>
+                        <div class="earnings-amount">৳1,245.00</div>
                         <button class="btn-primary">Request Payout</button>
                     </div>
                 </div>
@@ -233,68 +324,195 @@
                             <tr>
                                 <td>May 30, 2026</td>
                                 <td>Chapter unlocks - The Last Kingdom</td>
-                                <td>$45.50</td>
+                                <td>৳45.50</td>
                                 <td><span class="status-badge status-completed">Completed</span></td>
                             </tr>
                             <tr>
                                 <td>May 29, 2026</td>
                                 <td>Chapter unlocks - Digital Dreams</td>
-                                <td>$32.00</td>
+                                <td>৳32.00</td>
                                 <td><span class="status-badge status-completed">Completed</span></td>
                             </tr>
                             <tr>
                                 <td>May 25, 2026</td>
-                                <td>Payout to PayPal</td>
-                                <td>-$500.00</td>
+                                <td>Payout to bKash</td>
+                                <td>-৳500.00</td>
                                 <td><span class="status-badge status-pending">Pending</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
+
+            <!-- Manage Chapters Section -->
+            <section id="manage-chapters" class="studio-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <button class="btn-secondary" onclick="showSection('my-books')" style="margin-bottom: 0.5rem; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px;">
+                            <i class="fas fa-arrow-left"></i> Back to Books
+                        </button>
+                        <h1 id="manageChaptersBookTitle" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0; font-size: 1.8rem;">Manage Chapters</h1>
+                    </div>
+                    <button class="btn-primary" onclick="openAddChapterModal()" style="border-radius: 6px;">
+                        <i class="fas fa-plus-circle"></i> Add New Chapter
+                    </button>
+                </div>
+                
+                <div class="transactions" style="padding: 2rem; border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 style="margin-bottom: 0;">Uploaded Chapters</h2>
+                        <span class="chart-period" id="chaptersCountBadge" style="font-weight: 700; border-radius: 20px;">0 Chapters</span>
+                    </div>
+                    <div style="overflow-x: auto; width: 100%;">
+                        <table class="transactions-table" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>Num</th>
+                                    <th>Chapter Title</th>
+                                    <th>File Version</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Uploaded Date</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studioChaptersList">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/creator-studio.js"></script>
-    <script>
-        // Access Control - Only writers and admins can access Creator Studio
-        (function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const userRole = urlParams.get('role') || localStorage.getItem('userRole') || 'reader';
-            
-            // Check if user is reader (not writer or admin)
-            if (userRole === 'reader') {
-                alert('Access Denied! Only writers and administrators can access Creator Studio.\n\nPlease upgrade to a writer account from your profile.');
-                window.location.href = 'profile.html?role=reader';
-                return;
-            }
-            
-            // Store role for future checks
-            localStorage.setItem('userRole', userRole);
-        })();
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
 
-        // Creator Studio animations
-        gsap.registerPlugin(ScrollTrigger);
-        
-        gsap.from('.stat-card', {
-            duration: 0.8,
-            y: 30,
-            opacity: 0,
-            stagger: 0.1,
-            ease: 'power3.out',
-            delay: 0.2
-        });
-        
-        gsap.from('.sidebar-link', {
-            duration: 0.6,
-            x: -30,
-            opacity: 0,
-            stagger: 0.05,
-            ease: 'power2.out'
-        });
-    </script>
+    <!-- Edit Book Modal -->
+    <div id="editBookModal" class="modal">
+        <div class="modal-content" style="max-width: 600px; border-radius: 16px;">
+            <span class="close" onclick="closeEditBookModal()">&times;</span>
+            <h2 style="font-family: 'PT Serif', serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-primary);">Edit Book Details</h2>
+            <form id="editBookForm" class="book-form" style="background: transparent; border: none; padding: 0; box-shadow: none; max-width: 100%;">
+                <input type="hidden" id="editBookId">
+                <div class="form-group">
+                    <label>Book Title</label>
+                    <input type="text" id="editBookTitle" required placeholder="Enter book title">
+                </div>
+                <div class="form-group">
+                    <label>Synopsis</label>
+                    <textarea id="editBookSynopsis" rows="5" required placeholder="Write a synopsis..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Genre</label>
+                        <select id="editBookGenre" required>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="romance">Romance</option>
+                            <option value="scifi">Sci-Fi</option>
+                            <option value="mystery">Mystery</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="horror">Horror</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Age Rating</label>
+                        <select id="editBookRating" required>
+                            <option value="general">General</option>
+                            <option value="teen">Teen (13+)</option>
+                            <option value="mature">Mature (18+)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="button" class="btn-secondary" onclick="closeEditBookModal()" style="border-radius: 6px;">Cancel</button>
+                    <button type="submit" class="btn-primary" style="border-radius: 6px;">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chapter Management Modal -->
+    <div id="chapterModal" class="modal">
+        <div class="modal-content" style="max-width: 600px; border-radius: 16px;">
+            <span class="close" onclick="closeChapterModal()">&times;</span>
+            <h2 id="chapterModalTitle" style="font-family: 'PT Serif', serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-primary);">Add New Chapter</h2>
+            <form id="chapterForm" class="book-form" style="background: transparent; border: none; padding: 0; box-shadow: none; max-width: 100%;">
+                <input type="hidden" id="chapterBookId">
+                <input type="hidden" id="editChapterId">
+                <div class="form-group">
+                    <label>Chapter Number</label>
+                    <input type="number" id="chapterNumber" required min="1" placeholder="e.g. 1" style="width: 100%; padding: 0.9rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border-color); background-color: var(--bg-main); color: var(--text-primary); font-size: 0.95rem; font-weight: 600;">
+                </div>
+                <div class="form-group">
+                    <label>Chapter Title</label>
+                    <input type="text" id="chapterTitleField" required placeholder="Enter chapter title (e.g. The Awakening)">
+                </div>
+                <div class="form-group">
+                    <label>Upload Chapter PDF</label>
+                    <input type="file" id="chapterPdfFile" accept=".pdf,image/*">
+                    <small id="chapterFileDisplay" style="color: var(--success-color); font-weight: 700; margin-top: 0.5rem; display: none;"></small>
+                    <small style="color: var(--text-secondary); display: block; margin-top: 0.4rem;">Provide the chapter pages in PDF format (or webtoon image panels)</small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Access Type</label>
+                        <select id="chapterAccessType" onchange="toggleChapterPriceVisibility()" required>
+                            <option value="free">Free Access</option>
+                            <option value="paid">Paid (Unlock with Coins)</option>
+                        </select>
+                    </div>
+                    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Welcome to StoryVerse</div>
+                <h1 class="hero-title">Publish Your Stories.<br>Build Your Audience.<br>Earn Money.</h1>
+                <p class="hero-subtitle">Join thousands of writers who are sharing their stories and earning from their passion. No upfront costs, no barriers.</p>
+                <div class="hero-buttons">
+                    <button class="btn-large btn-primary" id="heroStartWriting">Start Writing Today</button>
+                    <button class="btn-large btn-secondary" id="heroExplore">Explore Stories</button>
+                </div>
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&h=800&fit=crop" alt="Writing" class="hero-image">
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Active Writers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2M+</span>
+                        <span class="stat-label">Stories Published</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">৳5M+</span>
+                        <span class="stat-label">Paid to Writers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><div class="form-group" id="chapterPriceContainer" style="display: none;">
+                        <label>Coin Price (৳)</label>
+                        <input type="number" id="chapterPrice" min="1" placeholder="e.g. 10" style="width: 100%; padding: 0.9rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border-color); background-color: var(--bg-main); color: var(--text-primary); font-size: 0.95rem; font-weight: 600;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="button" class="btn-secondary" onclick="closeChapterModal()" style="border-radius: 6px;">Cancel</button>
+                    <button type="submit" class="btn-primary" id="chapterSubmitBtn" style="border-radius: 6px;">Publish Chapter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/creator-studio.js"></script>
 </body>
 </html>

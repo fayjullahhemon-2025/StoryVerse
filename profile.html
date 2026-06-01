@@ -332,10 +332,14 @@
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="discover.html" class="nav-link">Discover</a>
                 <a href="trending.html" class="nav-link">Trending</a>
+                <a href="library.html" class="nav-link">My Library</a>
+                <a href="wallet.html" class="nav-link">Wallet</a>
             </div>
             <div class="nav-actions">
-                <div class="user-menu" id="userMenu">
-                    <img src="https://ui-avatars.com/api/?name=Demo+User&background=62ab00&color=fff" alt="User" class="user-avatar" id="userAvatar">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <img src="https://ui-avatars.com/api/?name=User&background=eccd00&color=282828" alt="User" class="user-avatar" id="userAvatar">
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
                         <a href="library.html"><i class="fas fa-book"></i> My Library</a>
@@ -470,10 +474,10 @@
                 },
                 recentActivity: [
                     { type: 'write', text: 'Published Chapter 30 of "The Last Kingdom"', time: '3 hours ago' },
-                    { type: 'earn', text: 'Earned $125 from chapter unlocks', time: '1 day ago' },
+                    { type: 'earn', text: 'Earned ৳125 from chapter unlocks', time: '1 day ago' },
                     { type: 'write', text: 'Gained 50 new followers', time: '2 days ago' },
                     { type: 'write', text: 'Reached 100K total views milestone', time: '5 days ago' },
-                    { type: 'earn', text: 'Received payout of $750', time: '1 week ago' }
+                    { type: 'earn', text: 'Received payout of ৳750', time: '1 week ago' }
                 ]
             },
             admin: {
@@ -757,7 +761,7 @@
                                     <div class="progress-bar">
                                         <div class="progress-fill" style="width: ${(currentUser.stats.nextPayout / 1000) * 100}%"></div>
                                     </div>
-                                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Minimum payout: $1000</p>
+                                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Minimum payout: ৳1000</p>
                                 </div>
                             </div>
                         </div>
@@ -820,26 +824,21 @@
             }
         }
 
-        // Dropdown menu
-        const userAvatar = document.getElementById('userAvatar');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        if (userAvatar && dropdownMenu) {
-            userAvatar.onclick = function() {
-                dropdownMenu.classList.toggle('show');
-            };
-        }
-
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.onclick = function(e) {
-                e.preventDefault();
-                localStorage.removeItem('currentUser');
-                window.location.href = 'index.html';
-            };
-        }
+        // Dropdown menu - handled by main.js
 
         // Initialize
         loadProfile();
     </script>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="authContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
