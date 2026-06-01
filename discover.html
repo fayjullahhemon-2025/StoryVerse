@@ -29,7 +29,7 @@
                 <button class="btn-secondary" id="loginBtn">Login</button>
                 <button class="btn-primary" id="signupBtn">Sign Up</button>
                 <div class="user-menu" id="userMenu" style="display: none;">
-                    <img src="assets/default-avatar.png" alt="User" class="user-avatar" id="userAvatar">
+                    <img src="https://ui-avatars.com/api/?name=User&background=eccd00&color=282828" alt="User" class="user-avatar" id="userAvatar">
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
                         <a href="library.html"><i class="fas fa-book"></i> My Library</a>
@@ -44,51 +44,98 @@
         </div>
     </nav>
 
-    <!-- Search & Filter Section -->
-    <section class="search-section">
-        <div class="container">
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search for stories, authors, genres...">
-            </div>
-            <div class="filters">
-                <select id="genreFilter" class="filter-select">
-                    <option value="">All Genres</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="romance">Romance</option>
-                    <option value="scifi">Sci-Fi</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="horror">Horror</option>
-                </select>
-                <select id="statusFilter" class="filter-select">
-                    <option value="">All Status</option>
-                    <option value="ongoing">Ongoing</option>
-                    <option value="completed">Completed</option>
-                </select>
-                <select id="priceFilter" class="filter-select">
-                    <option value="">All Types</option>
-                    <option value="free">Free</option>
-                    <option value="premium">Premium</option>
-                </select>
-                <select id="sortFilter" class="filter-select">
-                    <option value="popular">Most Popular</option>
-                    <option value="rating">Highest Rated</option>
-                    <option value="newest">Newest</option>
-                    <option value="updated">Recently Updated</option>
-                </select>
-            </div>
-        </div>
-    </section>
+    <!-- Mobile Overlay Backdrop -->
+    <div id="filterBackdrop" class="filter-backdrop"></div>
 
-    <!-- Books Grid -->
+    <!-- Discover Content Section with Grid Layout -->
     <section class="discover-content">
         <div class="container">
-            <div class="results-header">
-                <h2 id="resultsCount">Showing all stories</h2>
-            </div>
-            <div class="books-grid" id="discoverBooks">
-                <!-- Books will be loaded dynamically -->
+            <div class="discover-layout">
+                <!-- Left Sidebar: Filters -->
+                <aside class="discover-sidebar" id="discoverSidebar">
+                    <button id="closeFilters" class="close-sidebar-btn" aria-label="Close Filters">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="sidebar-header">
+                        <h3><i class="fas fa-sliders-h"></i> Filters</h3>
+                        <button id="resetFilters" class="btn-reset" title="Clear all filters">Clear All</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="genreFilter" class="filter-label"><i class="fas fa-tags"></i> Genre</label>
+                        <div class="select-wrapper">
+                            <select id="genreFilter" class="filter-select">
+                                <option value="">All Genres</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="romance">Romance</option>
+                                <option value="scifi">Sci-Fi</option>
+                                <option value="mystery">Mystery</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="statusFilter" class="filter-label"><i class="fas fa-info-circle"></i> Status</label>
+                        <div class="select-wrapper">
+                            <select id="statusFilter" class="filter-select">
+                                <option value="">All Status</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="priceFilter" class="filter-label"><i class="fas fa-coins"></i> Access Type</label>
+                        <div class="select-wrapper">
+                            <select id="priceFilter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="free">Free</option>
+                                <option value="premium">Premium</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sortFilter" class="filter-label"><i class="fas fa-sort-amount-down"></i> Sort By</label>
+                        <div class="select-wrapper">
+                            <select id="sortFilter" class="filter-select">
+                                <option value="popular">Most Popular</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="newest">Newest</option>
+                                <option value="updated">Recently Updated</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Main Column: Search & Book Grid -->
+                <main class="discover-main">
+                    <!-- Search input -->
+                    <div class="search-bar-wrapper">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search for stories, authors, genres...">
+                        </div>
+                        <button id="mobileFilterToggle" class="btn-mobile-filter" aria-label="Toggle Filters">
+                            <i class="fas fa-filter"></i> Filters
+                        </button>
+                    </div>
+                    
+                    <div class="results-header">
+                        <h2 id="resultsCount">Showing all stories</h2>
+                    </div>
+                    
+                    <div class="books-grid" id="discoverBooks">
+                        <!-- Books will be loaded dynamically -->
+                    </div>
+                </main>
             </div>
         </div>
     </section>

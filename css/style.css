@@ -211,7 +211,11 @@ h4 {
 
 .dropdown-menu a:hover {
     background-color: var(--color-bg-secondary);
-    color: var(--color-primary);
+    color: var(--color-success);
+}
+
+.dropdown-menu a:hover i {
+    color: var(--color-success);
 }
 
 .dropdown-menu hr {
