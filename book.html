@@ -175,6 +175,1277 @@
         </div>
     </div>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-modal-content">
+            <span class="payment-close" onclick="closePaymentModal()">&times;</span>
+            
+            <!-- Payment Method Selection -->
+            <div id="paymentMethodSelection">
+                <h2>Unlock Chapter</h2>
+                <div class="payment-chapter-info">
+                    <p id="chapterTitle">Chapter 4: The Mage's Secret</p>
+                    <p class="payment-amount">Amount: <span id="chapterPrice">৳10</span></p>
+                </div>
+                
+                <h3>Select Payment Method</h3>
+                <div class="payment-methods">
+                    <div class="payment-method-btn bkash" onclick="selectPaymentMethod('bkash')">
+                        <div class="payment-method-logo">
+                            <span class="mfs-initial">b</span>bKash
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="payment-method-btn nagad" onclick="selectPaymentMethod('nagad')">
+                        <div class="payment-method-logo">
+                            <span class="mfs-initial">n</span>Nagad
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="payment-method-btn rocket" onclick="selectPaymentMethod('rocket')">
+                        <div class="payment-method-logo">
+                            <span class="mfs-initial">r</span>Rocket
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="payment-method-btn card-btn" onclick="selectPaymentMethod('card')">
+                        <div class="payment-method-logo">
+                            <i class="fas fa-credit-card"></i> Credit / Debit Card
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- bKash Interface -->
+            <div id="bkashInterface" class="payment-interface" style="display: none;">
+                <div class="bkash-header">
+                    <button class="mfs-back-btn" onclick="backToMethods()"><i class="fas fa-arrow-left"></i></button>
+                    <div class="bkash-merchant-info">
+                        <span class="bkash-merchant">StoryVerse</span>
+                        <span class="bkash-amount" id="bkashAmountVal">৳10.00</span>
+                    </div>
+                    <div class="bkash-logo-container">
+                        <span class="bkash-logo-text">bKash</span>
+                    </div>
+                </div>
+                <div class="bkash-body">
+                    <!-- Step 1: Phone -->
+                    <div id="bkashStep1" class="bkash-step">
+                        <div class="mfs-instruction">Enter your bKash Account Number</div>
+                        <div class="mfs-input-container">
+                            <span class="mfs-prefix">+88</span>
+                            <input type="tel" id="bkashPhone" placeholder="01XXXXXXXXX" maxlength="11" oninput="validateMfsPhone('bkash')">
+                        </div>
+                        <div class="bkash-disclaimer">By clicking Proceed, you agree to our terms and conditions.</div>
+                        <div class="bkash-actions-footer">
+                            <button class="bkash-btn btn-close" onclick="closePaymentModal()">Close</button>
+                            <button class="bkash-btn btn-proceed" id="bkashBtn1" disabled onclick="sendMfsOtp('bkash')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: OTP -->
+                    <div id="bkashStep2" class="bkash-step" style="display: none;">
+                        <div class="mfs-instruction">Enter verification code sent to <span class="phone-display" id="bkashPhoneDisplay">01XXXXXXXXX</span></div>
+                        <div class="mfs-otp-container">
+                            <input type="text" id="bkashOtp" placeholder="Enter Verification Code" maxlength="6" oninput="validateMfsOtp('bkash')">
+                        </div>
+                        <div class="mfs-timer-container">
+                            Code expires in <span class="otp-timer" id="bkashTimer">120</span>s
+                            <span class="resend-link" id="bkashResend" style="display:none;" onclick="sendMfsOtp('bkash')">Resend Code</span>
+                        </div>
+                        <div class="bkash-actions-footer">
+                            <button class="bkash-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="bkash-btn btn-proceed" id="bkashBtn2" disabled onclick="verifyMfsOtp('bkash')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: PIN -->
+                    <div id="bkashStep3" class="bkash-step" style="display: none;">
+                        <div class="mfs-instruction">Enter your 5-digit bKash PIN</div>
+                        <div class="mfs-pin-container">
+                            <input type="password" id="bkashPin" placeholder="•••••" maxlength="5" oninput="validateMfsPin('bkash')">
+                        </div>
+                        <div class="bkash-actions-footer">
+                            <button class="bkash-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="bkash-btn btn-proceed" id="bkashBtn3" disabled onclick="submitMfsPayment('bkash')">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nagad Interface -->
+            <div id="nagadInterface" class="payment-interface" style="display: none;">
+                <div class="nagad-header">
+                    <button class="mfs-back-btn" onclick="backToMethods()"><i class="fas fa-arrow-left"></i></button>
+                    <div class="nagad-merchant-info">
+                        <span class="nagad-merchant">StoryVerse</span>
+                        <span class="nagad-amount" id="nagadAmountVal">৳10.00</span>
+                    </div>
+                    <div class="nagad-logo-container">
+                        <span class="nagad-logo-text">Nagad</span>
+                    </div>
+                </div>
+                <div class="nagad-body">
+                    <!-- Step 1: Phone -->
+                    <div id="nagadStep1" class="nagad-step">
+                        <div class="mfs-instruction">Enter your Nagad Account Number</div>
+                        <div class="mfs-input-container">
+                            <span class="mfs-prefix">+88</span>
+                            <input type="tel" id="nagadPhone" placeholder="01XXXXXXXXX" maxlength="11" oninput="validateMfsPhone('nagad')">
+                        </div>
+                        <div class="nagad-disclaimer">By clicking Proceed, you agree to our terms and conditions.</div>
+                        <div class="nagad-actions-footer">
+                            <button class="nagad-btn btn-close" onclick="closePaymentModal()">Close</button>
+                            <button class="nagad-btn btn-proceed" id="nagadBtn1" disabled onclick="sendMfsOtp('nagad')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: OTP -->
+                    <div id="nagadStep2" class="nagad-step" style="display: none;">
+                        <div class="mfs-instruction">Enter verification code sent to <span class="phone-display" id="nagadPhoneDisplay">01XXXXXXXXX</span></div>
+                        <div class="mfs-otp-container">
+                            <input type="text" id="nagadOtp" placeholder="Enter Verification Code" maxlength="6" oninput="validateMfsOtp('nagad')">
+                        </div>
+                        <div class="mfs-timer-container">
+                            Code expires in <span class="otp-timer" id="nagadTimer">120</span>s
+                            <span class="resend-link" id="nagadResend" style="display:none;" onclick="sendMfsOtp('nagad')">Resend Code</span>
+                        </div>
+                        <div class="nagad-actions-footer">
+                            <button class="nagad-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="nagad-btn btn-proceed" id="nagadBtn2" disabled onclick="verifyMfsOtp('nagad')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: PIN -->
+                    <div id="nagadStep3" class="nagad-step" style="display: none;">
+                        <div class="mfs-instruction">Enter your 4-digit Nagad PIN</div>
+                        <div class="mfs-pin-container">
+                            <input type="password" id="nagadPin" placeholder="••••" maxlength="4" oninput="validateMfsPin('nagad')">
+                        </div>
+                        <div class="nagad-actions-footer">
+                            <button class="nagad-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="nagad-btn btn-proceed" id="nagadBtn3" disabled onclick="submitMfsPayment('nagad')">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rocket Interface -->
+            <div id="rocketInterface" class="payment-interface" style="display: none;">
+                <div class="rocket-header">
+                    <button class="mfs-back-btn" onclick="backToMethods()"><i class="fas fa-arrow-left"></i></button>
+                    <div class="rocket-merchant-info">
+                        <span class="rocket-merchant">StoryVerse</span>
+                        <span class="rocket-amount" id="rocketAmountVal">৳10.00</span>
+                    </div>
+                    <div class="rocket-logo-container">
+                        <span class="rocket-logo-text">Rocket</span>
+                    </div>
+                </div>
+                <div class="rocket-body">
+                    <!-- Step 1: Phone -->
+                    <div id="rocketStep1" class="rocket-step">
+                        <div class="mfs-instruction">Enter 12-digit Rocket Mobile Number</div>
+                        <div class="mfs-input-container">
+                            <span class="mfs-prefix">+88</span>
+                            <input type="tel" id="rocketPhone" placeholder="01XXXXXXXXXX" maxlength="12" oninput="validateMfsPhone('rocket')">
+                        </div>
+                        <div class="rocket-disclaimer">Includes the 1-digit check digit. Agree to terms by proceeding.</div>
+                        <div class="rocket-actions-footer">
+                            <button class="rocket-btn btn-close" onclick="closePaymentModal()">Close</button>
+                            <button class="rocket-btn btn-proceed" id="rocketBtn1" disabled onclick="sendMfsOtp('rocket')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: OTP -->
+                    <div id="rocketStep2" class="rocket-step" style="display: none;">
+                        <div class="mfs-instruction">Enter verification code sent to <span class="phone-display" id="rocketPhoneDisplay">01XXXXXXXXXX</span></div>
+                        <div class="mfs-otp-container">
+                            <input type="text" id="rocketOtp" placeholder="Enter Verification Code" maxlength="6" oninput="validateMfsOtp('rocket')">
+                        </div>
+                        <div class="mfs-timer-container">
+                            Code expires in <span class="otp-timer" id="rocketTimer">120</span>s
+                            <span class="resend-link" id="rocketResend" style="display:none;" onclick="sendMfsOtp('rocket')">Resend Code</span>
+                        </div>
+                        <div class="rocket-actions-footer">
+                            <button class="rocket-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="rocket-btn btn-proceed" id="rocketBtn2" disabled onclick="verifyMfsOtp('rocket')">Proceed</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: PIN -->
+                    <div id="rocketStep3" class="rocket-step" style="display: none;">
+                        <div class="mfs-instruction">Enter your 5-digit Rocket PIN</div>
+                        <div class="mfs-pin-container">
+                            <input type="password" id="rocketPin" placeholder="•••••" maxlength="5" oninput="validateMfsPin('rocket')">
+                        </div>
+                        <div class="rocket-actions-footer">
+                            <button class="rocket-btn btn-close" onclick="backToMethods()">Back</button>
+                            <button class="rocket-btn btn-proceed" id="rocketBtn3" disabled onclick="submitMfsPayment('rocket')">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Interface -->
+            <div id="cardInterface" class="payment-interface" style="display: none;">
+                <div class="payment-interface-header card-bg">
+                    <button class="back-btn" onclick="backToMethods()"><i class="fas fa-arrow-left"></i></button>
+                    <h2>Card Payment</h2>
+                </div>
+                <div class="payment-interface-body">
+                    <!-- Interactive Virtual Card -->
+                    <div class="virtual-card-wrapper">
+                        <div class="virtual-card" id="virtualCard">
+                            <div class="card-front">
+                                <div class="card-glow"></div>
+                                <div class="card-header">
+                                    <span class="chip"><i class="fas fa-microchip"></i></span>
+                                    <span class="card-brand-logo" id="cardBrandLogo"><i class="fas fa-credit-card"></i></span>
+                                </div>
+                                <div class="card-number-display" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                                <div class="card-footer">
+                                    <div class="card-holder">
+                                        <span class="label">Card Holder</span>
+                                        <span class="value" id="cardHolderDisplay">CARDHOLDER NAME</span>
+                                    </div>
+                                    <div class="card-expiry">
+                                        <span class="label">Expires</span>
+                                        <span class="value" id="cardExpiryDisplay">MM/YY</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="magnetic-stripe"></div>
+                                <div class="signature-area">
+                                    <span class="label">CVV</span>
+                                    <div class="cvv-display" id="cardCvvDisplay">***</div>
+                                </div>
+                                <div class="card-back-brand">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Form -->
+                    <div class="payment-form card-form">
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-credit-card input-icon"></i>
+                                <input type="tel" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" id="cardHolder" placeholder="Enter Cardholder Name" oninput="updateCardHolder()">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group expiry-group">
+                                <label>Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" oninput="formatCardExpiry()">
+                            </div>
+                            <div class="form-group cvv-group">
+                                <label>CVV</label>
+                                <input type="password" id="cardCvv" placeholder="123" maxlength="4" onfocus="flipCard(true)" onblur="flipCard(false)" oninput="updateCardCvv()">
+                            </div>
+                        </div>
+                        <button class="payment-submit-btn card-bg" id="cardPayBtn" disabled onclick="submitCardPayment()">
+                            Pay ৳10
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loader Screen -->
+            <div id="paymentLoader" class="payment-loader-screen" style="display: none;">
+                <div class="payment-loader-content">
+                    <div class="spinner"></div>
+                    <h3>Verifying Transaction</h3>
+                    <p id="loaderMessage">Please wait while we verify your details with the provider...</p>
+                </div>
+            </div>
+
+            <!-- Success Receipt Screen -->
+            <div id="paymentSuccessScreen" class="payment-success-screen" style="display: none;">
+                <div class="success-icon-wrapper">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <h2>Payment Successful!</h2>
+                <p class="success-sub">Chapter has been unlocked permanently</p>
+                <div class="receipt-details">
+                    <div class="receipt-row">
+                        <span>Chapter:</span>
+                        <span id="receiptChapter">Chapter 4: The Mage's Secret</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Paid Via:</span>
+                        <span id="receiptMethod" class="receipt-method-name">bKash</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Amount Paid:</span>
+                        <span id="receiptAmount" class="receipt-amount-val">৳10</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span>Transaction ID:</span>
+                        <span id="receiptTxId" class="receipt-txid-val">SV-82739485</span>
+                    </div>
+                </div>
+                <button class="receipt-confirm-btn" onclick="proceedToChapter()">Start Reading</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Notification Toast -->
+    <div id="smsToast" class="sms-toast">
+        <div class="sms-toast-header">
+            <div class="sms-header-left">
+                <i class="fas fa-comment-alt sms-bell"></i>
+                <span class="sms-sender">MESSAGES</span>
+            </div>
+            <span class="sms-time">just now</span>
+        </div>
+        <div class="sms-toast-title">StoryVerse Verification</div>
+        <div class="sms-toast-body" id="smsToastBody">
+            Your verification code is 582496. It will expire in 2 minutes.
+        </div>
+    </div>
+
+    <style>
+        /* Modern Premium Payment Modal Styling */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .payment-modal-content {
+            background-color: #ffffff;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .payment-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .payment-modal.active .payment-modal-content {
+            transform: scale(1);
+        }
+
+        .payment-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            z-index: 100;
+            width: 32px;
+            height: 32px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .payment-close:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        #paymentMethodSelection {
+            padding: 35px 25px;
+        }
+
+        #paymentMethodSelection h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0f172a;
+            font-family: var(--font-heading);
+        }
+
+        #paymentMethodSelection h3 {
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 25px 0 15px 0;
+            color: #64748b;
+        }
+
+        .payment-chapter-info {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px dashed #e2e8f0;
+        }
+
+        .payment-chapter-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .payment-chapter-info p#chapterTitle {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .payment-amount {
+            font-weight: 700;
+            color: #62ab00;
+            font-size: 18px !important;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-method-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #f1f5f9;
+            background: #f8fafc;
+        }
+
+        .payment-method-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border-color: #e2e8f0;
+        }
+
+        .payment-method-btn.bkash:hover {
+            border-color: #E2136E;
+            background: rgba(226, 19, 110, 0.02);
+        }
+
+        .payment-method-btn.nagad:hover {
+            border-color: #EE4023;
+            background: rgba(238, 64, 35, 0.02);
+        }
+
+        .payment-method-btn.rocket:hover {
+            border-color: #8B3A9B;
+            background: rgba(139, 58, 155, 0.02);
+        }
+
+        .payment-method-btn.card-btn:hover {
+            border-color: #475569;
+            background: rgba(71, 85, 105, 0.02);
+        }
+
+        .payment-method-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mfs-initial {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .bkash .mfs-initial { background: #E2136E; }
+        .nagad .mfs-initial { background: #EE4023; }
+        .rocket .mfs-initial { background: #8B3A9B; }
+        .card-btn i { font-size: 20px; color: #475569; }
+
+        /* MFS Gateway Interfaces */
+        .bkash-header, .nagad-header, .rocket-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .bkash-header { background: #E2136E; }
+        .nagad-header { background: #EE4023; }
+        .rocket-header { background: #8B3A9B; }
+
+        .mfs-back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .mfs-back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .bkash-merchant-info, .nagad-merchant-info, .rocket-merchant-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .bkash-merchant, .nagad-merchant, .rocket-merchant {
+            font-size: 12px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bkash-amount, .nagad-amount, .rocket-amount {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .bkash-logo-container, .nagad-logo-container, .rocket-logo-container {
+            font-size: 18px;
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        .bkash-body, .nagad-body, .rocket-body {
+            padding: 24px;
+            background: #ffffff;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mfs-instruction {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 16px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .mfs-input-container, .mfs-otp-container, .mfs-pin-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .mfs-input-container:focus-within, .mfs-otp-container:focus-within, .mfs-pin-container:focus-within {
+            border-color: #64748b;
+        }
+
+        .bkash-body :focus-within { border-color: #E2136E !important; }
+        .nagad-body :focus-within { border-color: #EE4023 !important; }
+        .rocket-body :focus-within { border-color: #8B3A9B !important; }
+
+        .mfs-prefix {
+            background: #f1f5f9;
+            padding: 14px 16px;
+            color: #475569;
+            font-weight: 600;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .mfs-input-container input, .mfs-otp-container input, .mfs-pin-container input {
+            border: none;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            outline: none;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+        }
+
+        .mfs-otp-container input, .mfs-pin-container input {
+            text-align: center;
+            letter-spacing: 6px;
+        }
+
+        .bkash-disclaimer, .nagad-disclaimer, .rocket-disclaimer {
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .mfs-timer-container {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .otp-timer {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .resend-link {
+            color: #62ab00;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .bkash-actions-footer, .nagad-actions-footer, .rocket-actions-footer {
+            display: flex;
+            gap: 12px;
+        }
+
+        .bkash-btn, .nagad-btn, .rocket-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-close {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn-close:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-proceed {
+            color: #ffffff;
+        }
+
+        .bkash-btn.btn-proceed { background: #E2136E; }
+        .nagad-btn.btn-proceed { background: #EE4023; }
+        .rocket-btn.btn-proceed { background: #8B3A9B; }
+
+        .btn-proceed:disabled {
+            background: #cbd5e1 !important;
+            color: #94a3b8 !important;
+            cursor: not-allowed;
+        }
+
+        .btn-proceed:not(:disabled):hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Card Payment Interface Styling */
+        .payment-interface-header {
+            padding: 20px 24px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .payment-interface-header h2 {
+            font-size: 18px;
+            margin: 0;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .payment-interface-body {
+            padding: 24px;
+        }
+
+        /* Virtual Card 3D Mockup */
+        .virtual-card-wrapper {
+            perspective: 1000px;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .virtual-card {
+            width: 100%;
+            height: 190px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .virtual-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
+            z-index: 2;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            transform: rotateY(180deg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chip {
+            font-size: 26px;
+            color: #eccd00;
+        }
+
+        .card-brand-logo {
+            font-size: 28px;
+            color: #ffffff;
+            transition: all 0.3s;
+        }
+
+        .card-number-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin: 15px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .card-holder, .card-expiry {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-holder .label, .card-expiry .label {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .card-holder .value, .card-expiry .value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .magnetic-stripe {
+            height: 40px;
+            background: #000000;
+            margin-left: -24px;
+            margin-right: -24px;
+            margin-top: 10px;
+        }
+
+        .signature-area {
+            background: #f1f5f9;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .signature-area .label {
+            position: absolute;
+            left: 10px;
+            top: -15px;
+            font-size: 9px;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .cvv-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 15px;
+            font-style: italic;
+        }
+
+        .card-back-brand {
+            align-self: flex-end;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Card Form Styles */
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        .input-icon-wrapper input {
+            padding-left: 42px;
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+            outline: none;
+            color: #0f172a;
+        }
+
+        .form-group input:focus {
+            border-color: #475569;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-submit-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .payment-submit-btn:disabled {
+            background: #cbd5e1 !important;
+            color: #94a3b8;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .payment-submit-btn:not(:disabled):hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        /* Loader Overlay Screen */
+        .payment-loader-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .payment-loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid #62ab00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .payment-loader-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .payment-loader-content p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Receipt Screen Styling */
+        .payment-success-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            z-index: 201;
+            padding: 35px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .success-icon-wrapper {
+            margin-bottom: 16px;
+        }
+
+        /* Drawing checkmark styling */
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 4;
+            stroke: #62ab00;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #62ab00;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 4;
+            stroke-miterlimit: 10;
+            stroke: #62ab00;
+            fill: none;
+            animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .8s forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 30px rgba(98, 171, 0, 0.1); }
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+
+        .payment-success-screen h2 {
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .success-sub {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .receipt-details {
+            width: 100%;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #f1f5f9;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .receipt-row span:first-child {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .receipt-row span:last-child {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .receipt-method-name {
+            text-transform: capitalize;
+        }
+
+        .receipt-amount-val {
+            color: #62ab00 !important;
+            font-weight: 700 !important;
+        }
+
+        .receipt-txid-val {
+            font-family: monospace;
+            font-size: 12px;
+            color: #475569 !important;
+        }
+
+        .receipt-confirm-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: linear-gradient(135deg, #62ab00, #4d8800);
+            color: #ffffff;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(98, 171, 0, 0.2);
+        }
+
+        .receipt-confirm-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(98, 171, 0, 0.3);
+        }
+
+        /* SMS Banner Style */
+        .sms-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-150px);
+            width: 90%;
+            max-width: 360px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .sms-toast.active {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .sms-toast-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .sms-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sms-bell {
+            color: #3b82f6;
+            font-size: 14px;
+        }
+
+        .sms-sender {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 1px;
+        }
+
+        .sms-time {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .sms-toast-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .sms-toast-body {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.4;
+        }
+
+        .sms-toast-body strong {
+            color: #0f172a;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .payment-modal-content {
+                width: 95%;
+                border-radius: 20px;
+            }
+
+            .virtual-card {
+                height: 160px;
+            }
+
+            .card-number-display {
+                font-size: 15px;
+            }
+        }
+    </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/auth.js"></script>

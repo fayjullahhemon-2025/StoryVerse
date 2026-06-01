@@ -333,6 +333,11 @@
             color: #00A651;
         }
 
+        .payment-badge.card {
+            background: rgba(71, 85, 105, 0.1);
+            color: #475569;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -371,12 +376,193 @@
             margin: 0;
         }
 
+        /* How to Pay Steps */
+        .info-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+        }
+
+        .how-to-pay-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .pay-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .pay-step:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .pay-step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #62ab00, #4d8800);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            flex-shrink: 0;
+        }
+
+        .pay-step-content h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        .pay-step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Payment Methods Info Grid */
+        .payment-methods-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .payment-info-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 3px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+
+        .payment-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-info-card.bkash-border {
+            border-color: #E2136E;
+        }
+
+        .payment-info-card.rocket-border {
+            border-color: #8B3A9B;
+        }
+
+        .payment-info-card.nagad-border {
+            border-color: #EE4023;
+        }
+
+        .payment-info-logo {
+            margin-bottom: 20px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-info-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+        }
+
+        .faq-item {
+            border-bottom: 2px solid #f0f0f0;
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            color: #62ab00;
+        }
+
+        .faq-question i {
+            color: #62ab00;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(90deg);
+        }
+
+        .faq-question h4 {
+            font-size: 16px;
+            color: #333;
+            margin: 0;
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding-left: 29px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 15px;
+        }
+
+        .faq-answer p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .wallet-title {
                 font-size: 28px;
             }
 
             .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods-info-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -395,6 +581,16 @@
 
             .transaction-amount {
                 font-size: 16px;
+            }
+
+            .pay-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .how-to-pay-steps {
+                gap: 20px;
             }
         }
     </style>
@@ -433,105 +629,142 @@
             <div class="wallet-header-card">
                 <div class="wallet-header-content">
                     <div>
-                        <h1 class="wallet-title">Payment & Unlock Chapters</h1>
-                        <p class="wallet-subtitle">Pay directly through bKash, Rocket, Nagad, or SSL to unlock premium chapters</p>
+                        <h1 class="wallet-title">Payment Center</h1>
+                        <p class="wallet-subtitle">View your payment history and learn how to make payments</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Info Box -->
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> How It Works</h4>
-                <p>Select your preferred payment method below and pay the chapter price directly. Once payment is confirmed, the chapter will be unlocked instantly. No coins or wallet balance needed!</p>
-            </div>
-
-            <!-- Pricing Info -->
+            <!-- How to Pay Section -->
             <h2 class="section-title">
-                <i class="fas fa-tag"></i>
-                Chapter Pricing
+                <i class="fas fa-question-circle"></i>
+                How to Pay for Chapters
             </h2>
-            <div class="pricing-info">
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>Chapter Type</th>
-                            <th>Price (BDT)</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Free Chapters</strong></td>
-                            <td><span class="price-badge">৳0</span></td>
-                            <td>First 3-5 chapters are usually free to read</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Standard Chapters</strong></td>
-                            <td><span class="price-badge">৳10</span></td>
-                            <td>Regular premium chapters</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Special Chapters</strong></td>
-                            <td><span class="price-badge">৳15</span></td>
-                            <td>Extra-long or special event chapters</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Finale Chapters</strong></td>
-                            <td><span class="price-badge">৳20</span></td>
-                            <td>Season finale or book ending chapters</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="info-card">
+                <div class="how-to-pay-steps">
+                    <div class="pay-step">
+                        <div class="pay-step-number">1</div>
+                        <div class="pay-step-content">
+                            <h4>Find a Locked Chapter</h4>
+                            <p>Browse books and find chapters marked with a lock icon and price (৳10, ৳15, etc.)</p>
+                        </div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-number">2</div>
+                        <div class="pay-step-content">
+                            <h4>Click to Unlock</h4>
+                            <p>Click on the locked chapter to open the payment modal</p>
+                        </div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-number">3</div>
+                        <div class="pay-step-content">
+                            <h4>Select Payment Method</h4>
+                            <p>Choose from bKash, Rocket, or Nagad</p>
+                        </div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-number">4</div>
+                        <div class="pay-step-content">
+                            <h4>Complete Payment</h4>
+                            <p>Enter your account number and PIN to complete the payment</p>
+                        </div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-number">5</div>
+                        <div class="pay-step-content">
+                            <h4>Read Instantly</h4>
+                            <p>Chapter unlocks immediately after successful payment</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Payment Methods -->
-            <h2 class="section-title" id="payment-methods">
+            <!-- Payment Methods Info -->
+            <h2 class="section-title">
                 <i class="fas fa-credit-card"></i>
-                Select Payment Method
+                Supported Payment Methods
             </h2>
-            <div class="payment-methods-grid">
-                <div class="payment-method-card bkash" onclick="selectPaymentMethod('bkash')">
-                    <div class="payment-logo">
-                        <svg viewBox="0 0 200 60" style="height: 50px;">
-                            <text x="10" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#E2136E">bKash</text>
-                        </svg>
+            <div class="payment-methods-info-grid">
+                <div class="payment-info-card bkash-border">
+                    <div class="payment-info-logo">
+                        <div style="font-size: 32px; font-weight: bold; color: #E2136E;">bKash</div>
                     </div>
-                    <div class="payment-name">bKash</div>
-                    <div class="payment-description">Pay securely with your bKash mobile wallet. Instant confirmation.</div>
-                    <button>Pay with bKash</button>
+                    <p>Most popular mobile financial service in Bangladesh. Instant payment confirmation.</p>
                 </div>
-                
-                <div class="payment-method-card rocket" onclick="selectPaymentMethod('rocket')">
-                    <div class="payment-logo">
-                        <svg viewBox="0 0 200 60" style="height: 50px;">
-                            <text x="10" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#8B3A9B">Rocket</text>
-                        </svg>
+                <div class="payment-info-card rocket-border">
+                    <div class="payment-info-logo">
+                        <div style="font-size: 32px; font-weight: bold; color: #8B3A9B;">Rocket</div>
                     </div>
-                    <div class="payment-name">Rocket</div>
-                    <div class="payment-description">Dutch-Bangla Bank's Rocket mobile financial service.</div>
-                    <button>Pay with Rocket</button>
+                    <p>Dutch-Bangla Bank's mobile financial service. Secure and reliable payments.</p>
                 </div>
-                
-                <div class="payment-method-card nagad" onclick="selectPaymentMethod('nagad')">
-                    <div class="payment-logo">
-                        <svg viewBox="0 0 200 60" style="height: 50px;">
-                            <text x="10" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#EE4023">Nagad</text>
-                        </svg>
+                <div class="payment-info-card nagad-border">
+                    <div class="payment-info-logo">
+                        <div style="font-size: 32px; font-weight: bold; color: #EE4023;">Nagad</div>
                     </div>
-                    <div class="payment-name">Nagad</div>
-                    <div class="payment-description">Bangladesh Post Office's digital financial service.</div>
-                    <button>Pay with Nagad</button>
+                    <p>Bangladesh Post Office's digital financial service. Fast and convenient.</p>
                 </div>
-                
-                <div class="payment-method-card ssl" onclick="selectPaymentMethod('ssl')">
-                    <div class="payment-logo">
-                        <svg viewBox="0 0 200 60" style="height: 50px;">
-                            <text x="10" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#00A651">SSLCommerz</text>
-                        </svg>
+            </div>
+
+            <!-- FAQ Section -->
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i>
+                Frequently Asked Questions
+            </h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>How much does it cost to unlock a chapter?</h4>
                     </div>
-                    <div class="payment-name">SSLCommerz</div>
-                    <div class="payment-description">Pay with credit/debit cards, internet banking, and more.</div>
-                    <button>Pay with SSL</button>
+                    <div class="faq-answer">
+                        <p>Chapter prices vary: Standard chapters cost ৳10, Special chapters cost ৳15, and Finale chapters cost ৳20. The first 3-5 chapters are usually free.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>Is my payment information secure?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We use secure payment gateways (bKash, Rocket, Nagad) that are certified and trusted by millions of users in Bangladesh. We never store your PIN or sensitive payment information.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>Can I get a refund after unlocking a chapter?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once a chapter is unlocked, it remains accessible to you permanently. Refunds are only available in case of technical errors or duplicate payments.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>Do I need to pay again to re-read a chapter?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No! Once you unlock a chapter, you can read it unlimited times without paying again. It's yours forever.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>What if my payment fails?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If your payment fails, please check your account balance and try again. If the problem persists, contact your payment provider's customer service or reach out to our support team.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <h4>Can I use multiple payment methods?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can use any of our supported payment methods (bKash, Rocket, Nagad) for different transactions. Choose whichever is most convenient for you.</p>
+                    </div>
                 </div>
             </div>
 
@@ -594,7 +827,8 @@
                 'bkash': 'bKash',
                 'rocket': 'Rocket',
                 'nagad': 'Nagad',
-                'ssl': 'SSLCommerz'
+                'ssl': 'SSLCommerz',
+                'card': 'Card'
             };
             
             alert(`You selected ${methodNames[method]}.\n\nIn production, you will be redirected to ${methodNames[method]} payment gateway to complete your payment.\n\nFor demo purposes, payment is simulated.`);
@@ -660,7 +894,8 @@
                     'bkash': 'bKash',
                     'rocket': 'Rocket',
                     'nagad': 'Nagad',
-                    'ssl': 'SSLCommerz'
+                    'ssl': 'SSLCommerz',
+                    'card': 'Card'
                 };
                 
                 return `
@@ -711,6 +946,25 @@
                 window.location.href = 'index.html';
             };
         }
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
 
         // Initialize
         loadTransactions();
